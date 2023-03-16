@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ThaiToneCardView: View {
     @EnvironmentObject var gameLevelData: GameLevelData
+//    @EnvironmentObject var wttsstate: wttsState
     
     let gameUnlock = [true, false, false]
     let iconLock = ["lock.fill", "play.fill"]
@@ -16,7 +17,6 @@ struct ThaiToneCardView: View {
     
     @State private var progress = 0.00
     @State private var titleProgress = 0
-    @State var wttscompleted = false
     
     @State private var ThaiToneView = false
     @State private var ColorBookView = false
@@ -28,7 +28,9 @@ struct ThaiToneCardView: View {
                 Text("ThaiTone")
                     .font(.system(size: 32, weight: .bold))
                 Text("Play and learn to unlock. Have fun!")
-                Text("\(gameLevelData.wttsProgress)/gameLevelData")
+//                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
+                Text("\(gameLevelData.GameLevel) :gameLevel")
+//                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
                 HStack {
                     Button(action: {
                         gameLevelData.unlocklevel()
@@ -47,6 +49,8 @@ struct ThaiToneCardView: View {
                     }
                 }
             }
+            .environmentObject(GameLevelData())
+
             //            .frame(width: .infinity, height: 140, alignment: .center)
             .padding(.bottom, 60)
             
@@ -72,11 +76,11 @@ struct ThaiToneCardView: View {
                             .frame(width: 1060, height: 120, alignment: .leading)
                             
                             Button(action: {
-                                ThaiToneView.toggle()
-                                if (gameLevelData.wttsProgress >= 4) {
-                                    wttscompleted = true
+                                if (gameLevelData.wttsUnlockLevel >= 4) {
+                                    gameLevelData.wttscompleted = true
                                     print("wttscompleted = true")
                                 }
+                                ThaiToneView.toggle()
                             })
                             {
                                 Image(systemName: "xmark.circle.fill")

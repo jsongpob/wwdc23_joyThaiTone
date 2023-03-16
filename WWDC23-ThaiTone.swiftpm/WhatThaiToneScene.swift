@@ -10,12 +10,12 @@ import SwiftUI
 struct WhatThaiToneScene: View {
     @EnvironmentObject var gameLevelData: GameLevelData
     
-    @State var isShowingSheetA = false
-    @State var isShowingSheetB = false
-    @State var isShowingSheetC = false
-    @State var isShowingSheetD = false
+    @State var isShowingSheetA = UserDefaults.standard.bool(forKey: "isShowingSheetA")
+    @State var isShowingSheetB = UserDefaults.standard.bool(forKey: "isShowingSheetB")
+    @State var isShowingSheetC = UserDefaults.standard.bool(forKey: "isShowingSheetC")
+    @State var isShowingSheetD = UserDefaults.standard.bool(forKey: "isShowingSheetD")
     
-    @StateObject var wttsstate = wttsState()
+//    @StateObject var wttsstate = wttsState()
     @StateObject var appstatedata = GameLevelData()
     
     @State var titleWcardList = ["What's ThaiTone", "Thai Inspiration", "Topic Name", "Thai Cultures"]
@@ -38,7 +38,7 @@ struct WhatThaiToneScene: View {
             //            .offset(x: 0.0,y: -120.0)
             
             VStack(spacing: 30) {
-                Text("wttsUnlockLevel:\(wttsstate.wttsUnlockLevel) wttsTest:\(wttsstate.wttsUnlockLevelState) wttsprogress:\(gameLevelData.wttsProgress)")
+//                Text("wttsUnlockLevel:\(gameLevelData.wttsUnlockLevel) wttsTest:\(gameLevelData.wttsUnlockLevelState) wttsprogress:\(gameLevelData.wttsProgress)")
                 //LINE-1
                 HStack(spacing: 30) {
                     
@@ -46,8 +46,8 @@ struct WhatThaiToneScene: View {
                     Button(action:
                     {
                         isShowingSheetA.toggle()
-                        wttsprogresscompleted1()
-                        wttsstate.wttsUnlock1()
+//                        wttsprogresscompleted1()
+                        gameLevelData.wttsUnlock1()
                     })
                     {
                         WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "Art-1", shadowWcard: 16, Xcard: 450, Ycard: 320)
@@ -64,8 +64,8 @@ struct WhatThaiToneScene: View {
                     Button(action:
                     {
                         isShowingSheetB.toggle()
-                        wttsprogresscompleted2()
-                        wttsstate.wttsUnlock2()
+//                        wttsprogresscompleted2()
+                        gameLevelData.wttsUnlock2()
                     })
                     {
                         VStack {
@@ -90,8 +90,8 @@ struct WhatThaiToneScene: View {
                     Button(action:
                     {
                         isShowingSheetB.toggle()
-                        wttsprogresscompleted3()
-                        wttsstate.wttsUnlock3()
+//                        wttsprogresscompleted3()
+                        gameLevelData.wttsUnlock3()
                     })
                     {
                         VStack {
@@ -110,8 +110,8 @@ struct WhatThaiToneScene: View {
                     Button(action:
                     {
                         isShowingSheetB.toggle()
-                        wttsprogresscompleted4()
-                        wttsstate.wttsUnlock4()
+//                        wttsprogresscompleted4()
+                        gameLevelData.wttsUnlock4()
                     })
                     {
                         VStack {
@@ -133,22 +133,22 @@ struct WhatThaiToneScene: View {
         }
     }
     func wttsprogresscompleted1() {
-        if (wttsstate.wttsCard1 == false) {
+        if (gameLevelData.wttsCard1 == false) {
             gameLevelData.wttsProgress += 1
         }
     }
     func wttsprogresscompleted2() {
-        if (wttsstate.wttsCard2 == false) {
+        if (gameLevelData.wttsCard2 == false) {
             gameLevelData.wttsProgress += 1
         }
     }
     func wttsprogresscompleted3() {
-        if (wttsstate.wttsCard3 == false) {
+        if (gameLevelData.wttsCard3 == false) {
             gameLevelData.wttsProgress += 1
         }
     }
     func wttsprogresscompleted4() {
-        if (wttsstate.wttsCard4 == false) {
+        if (gameLevelData.wttsCard4 == false) {
             gameLevelData.wttsProgress += 1
         }
     }
@@ -158,62 +158,7 @@ struct WhatThaiToneScene: View {
 struct WhatThaiToneScene_Previews: PreviewProvider {
     static var previews: some View {
         WhatThaiToneScene()
+            .environmentObject(GameLevelData())
             .previewInterfaceOrientation(.landscapeRight)
     }
-}
-
-class wttsState: ObservableObject {
-    
-    @Published var wttsUnlockLevel: Int = 0 {
-        didSet {
-            print("\(wttsUnlockLevel)")
-            UserDefaults.standard.set(wttsUnlockLevel, forKey: "wttsUnlockLevelData")
-            if (wttsUnlockLevel >= 4) {
-                wttsProgress = true
-                print(wttsProgress)
-            }
-        }
-    }
-    
-    init() {
-        self.wttsProgress = false
-    }
-
-    @Published var wttsUnlockLevelState: Int = UserDefaults.standard.integer(forKey: "wttsUnlockLevelData")
-    
-    @Published var wttsProgress: Bool = false
-    
-    @Published var wttsCard1: Bool = false
-    @Published var wttsCard2: Bool = false
-    @Published var wttsCard3: Bool = false
-    @Published var wttsCard4: Bool = false
-    @Published var wttsprogresscompleted: Int = 0
-    
-    @Published var wttsData = 0
-    
-    func wttsUnlock1() {
-        if (wttsCard1 == false) {
-            wttsUnlockLevel += 1
-            wttsCard1 = true
-        }
-    }
-    func wttsUnlock2() {
-        if (wttsCard2 == false) {
-            wttsUnlockLevel += 1
-            wttsCard2 = true
-        }
-    }
-    func wttsUnlock3() {
-        if (wttsCard3 == false) {
-            wttsUnlockLevel += 1
-            wttsCard3 = true
-        }
-    }
-    func wttsUnlock4() {
-        if (wttsCard4 == false) {
-            wttsUnlockLevel += 1
-            wttsCard4 = true
-        }
-    }
-
 }

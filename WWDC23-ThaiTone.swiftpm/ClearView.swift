@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClearView: View {
-    @StateObject var gameLevelData = GameLevelData()
+    @EnvironmentObject var gameLevelData: GameLevelData
     
     var body: some View {
         VStack {
@@ -32,27 +32,25 @@ struct ClearView: View {
                            maxHeight: .infinity)
                 }
             }
-            Text("\(gameLevelData.FirstWelcomeView ? "True" : "False") :FirstdataWelcomeView")
-            
+            //            Text("\(gameLevelData.FirstWelcomeView ? "True" : "False") :FirstdataWelcomeView")
             //TAB VIEW
             TabView {
                 ThaiToneCardView()
                     .tabItem {
                         Label("Challenges", systemImage: "star.fill")
                     }
-//                if (A == A) {
+                if (gameLevelData.endTabUnlock == true) {
                     EndView()
                         .tabItem {
                             Label("End", systemImage: "star")
                         }
                         .badge("")
-//                }
+                }
                 AboutView()
                     .tabItem {
                         Label("About", systemImage: "info.circle.fill")
                     }
             }
-            .environmentObject(GameLevelData())
         }
     }
 }

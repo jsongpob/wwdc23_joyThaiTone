@@ -10,14 +10,18 @@ import SwiftUI
 
 class GameLevelData: ObservableObject {
     
-    @State var GameLevelData: Int = UserDefaults.standard.integer(forKey: "GameLevel")
+    @Published var endTabUnlock: Bool = false {
+        didSet {
+            print("endTabUnlock data changed")
+        }
+    }
     
-    @Published var GameLevel: Int = UserDefaults.standard.integer(forKey: "GameLevel")
+    @State var GameLevelData: Int = UserDefaults.standard.integer(forKey: "GameLevel")
+//    @ObservedObject var wttsstate = wttsState()
+    
     @Published var GameProgressView: Double = 0.0
     @Published var GameTest: Int = 10
     @Published var End: Bool = false
-    
-    @Published var wttsProgress = 0
 
 //    public init() {
 //        GameLevel = UserDefaults.standard.integer(forKey: "gameLevelCurrent")
@@ -32,6 +36,28 @@ class GameLevelData: ObservableObject {
 //    init() {
 //        FirstWelcomeView = true
 //    }
+    @Published var GameLevel: Int = UserDefaults.standard.integer(forKey: "GameLevel") {
+        didSet {
+            UserDefaults.standard.set(GameLevel, forKey: "GameLevel")
+            if (GameLevel >= 4) {
+                endTabUnlock = true
+            }
+        }
+    }
+    
+    @Published var wttsProgress = UserDefaults.standard.integer(forKey: "wttsProgress") {
+        didSet {
+            UserDefaults.standard.set(wttsProgress, forKey: "wttsProgress")
+            
+            if (wttsProgress == 4) {
+                unlocklevel()
+//                print("\(wttsProgress) :wttsProgress")
+            } else if (wttsProgress >= 5) {
+                wttsProgress = 4
+            }
+        }
+    }
+    
     @Published var FirstWelcomeView: Bool = UserDefaults.standard.bool(forKey: "datawelcomeview") {
         didSet {
             print("FirstWelcomeView bool changed")
@@ -47,14 +73,14 @@ class GameLevelData: ObservableObject {
     
     @Published var gameLevelProgressCurrent: Int = 0 {
         didSet {
-            print("gameLevelProgressCurrent:\(gameLevelProgressCurrent)")
+//            print("gameLevelProgressCurrent:\(gameLevelProgressCurrent)")
             UserDefaults.standard.set(gameLevelProgressCurrent, forKey: "gameLevelCurrent")
         }
     }
     
     @Published var GameProgress: Double = 0.0 {
         didSet {
-            print("\(GameProgress)")
+//            print("\(GameProgress)")
             UserDefaults.standard.set(GameProgress, forKey: "gameProgressCurrent")
         }
     }
@@ -62,15 +88,15 @@ class GameLevelData: ObservableObject {
     func unlocklevel() {
         GameLevel += 1
         gameLevelProgressCurrent = GameLevel
-        print("\(GameLevel)/GameLevel")
+//        print("\(GameLevel)/GameLevel")
         gameprogress()
     }
     
     func gameprogress() {
         GameProgress += 0.25
         GameProgressView = GameProgress*100
-        print("\(GameProgress)/GameProgressView")
-        print("\(End)/EndView")
+//        print("\(GameProgress)/GameProgressView")
+//        print("\(End)/EndView")
         if (GameLevel >= 4) {
             End = true
         } else {
@@ -82,17 +108,109 @@ class GameLevelData: ObservableObject {
     func gamereset() {
         GameLevel = 0
         GameProgress = 0.0
+        wttsProgress = 0
+        FirstWelcomeView = true
+        wttsResetUnlock()
+        wttscompleted = false
     }
     
     //FUNC to check WelcomeView it's show only on first time and store user data
     func dataWelcomeViewToggle() {
         if (FirstWelcomeView == true) {
             dataWelcomeView = false
-            print("\(dataWelcomeView) :dataWelcomeView")
+            GameLevel = 1
+//            print("\(dataWelcomeView) :dataWelcomeView")
             UserDefaults.standard.set(dataWelcomeView, forKey: "datawelcomeview")
+            UserDefaults.standard.set(GameLevel, forKey: "GameLevel")
+        }
+    }
+    
+    @Published var wttsUnlockLevel: Int = 0 {
+        didSet {
+//            print("\(wttsUnlockLevel)")
+            UserDefaults.standard.set(wttsUnlockLevel, forKey: "wttsUnlockLevelData")
+            if (wttsUnlockLevel >= 4) {
+//                wttscompleted = true
+//                print("wttscompleted: \(wttscompleted)")
+            }
+        }
+    }
+    
+    @Published var wttscompleted = UserDefaults.standard.bool(forKey: "wttscompleted") {
+        didSet {
+            UserDefaults.standard.set(wttscompleted, forKey: "wttscompleted")
+            if (wttscompleted == true) {
+                unlocklevel()
+//                print("wttscompleted == true")
+            }
+        }
+    }
+
+    @Published var wttsUnlockLevelState: Int = UserDefaults.standard.integer(forKey: "wttsUnlockLevelData")
+    
+    @Published var wttsCard1: Bool = UserDefaults.standard.bool(forKey: "wttsCard1") {
+        didSet {
+            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard1")
+//            print("wttsCard1: \(wttsCard1)")
+        }
+    }
+    //
+    @Published var wttsCard2: Bool = UserDefaults.standard.bool(forKey: "wttsCard2") {
+        didSet {
+            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard2")
+//            print("wttsCard2: \(wttsCard2)")
+        }
+    }
+    //
+    @Published var wttsCard3: Bool = UserDefaults.standard.bool(forKey: "wttsCard3") {
+        didSet {
+            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard3")
+//            print("wttsCard3: \(wttsCard3)")
+        }
+    }
+    //
+    @Published var wttsCard4: Bool = UserDefaults.standard.bool(forKey: "wttsCard4") {
+        didSet {
+            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard4")
+//            print("wttsCard4: \(wttsCard4)")
+        }
+    }
+    //
+    @Published var wttsprogresscompleted: Int = 0
+    
+    @Published var wttsData = 0
+    
+    func wttsResetUnlock() {
+        wttsCard1 = false
+        wttsCard2 = false
+        wttsCard3 = false
+        wttsCard4 = false
+    }
+    
+    func wttsUnlock1() {
+        if (wttsCard1 == false) {
+            wttsUnlockLevel += 1
+            wttsCard1 = true
+        }
+    }
+    func wttsUnlock2() {
+        if (wttsCard2 == false) {
+            wttsUnlockLevel += 1
+            wttsCard2 = true
+        }
+    }
+    func wttsUnlock3() {
+        if (wttsCard3 == false) {
+            wttsUnlockLevel += 1
+            wttsCard3 = true
+        }
+    }
+    func wttsUnlock4() {
+        if (wttsCard4 == false) {
+            wttsUnlockLevel += 1
+            wttsCard4 = true
         }
     }
     
 }
-
 
