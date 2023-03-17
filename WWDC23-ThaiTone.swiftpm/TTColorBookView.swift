@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TTColorBookView: View {
+    @EnvironmentObject var gameLevelData: GameLevelData
     
     //colordata
     struct ColorData: Identifiable {
@@ -209,6 +210,7 @@ struct TTColorBookView: View {
                             }
                             .onTapGesture {
                                 selectedColor = color
+                                gameLevelData.colorBookSelect += 1
                             }
                     }
                 }
@@ -225,6 +227,7 @@ struct TTColorBookView: View {
 struct TTColorBookView_Previews: PreviewProvider {
     static var previews: some View {
         TTColorBookView()
+            .environmentObject(GameLevelData())
             .previewInterfaceOrientation(.landscapeRight)
     }
 }

@@ -116,7 +116,20 @@ struct ThaiToneCardView: View {
                                         .font(.system(size: 36, weight: .bold))
                                         .frame(width: 400, alignment: .leading)
                                 }
-                                .frame(width: 1060, height: 120, alignment: .leading)
+                                .frame(width: 400, height: 120, alignment: .leading)
+                                .border(.red)
+                                
+                                if (gameLevelData.colorBookSelect < 5) {
+                                    Text("Select color you like! (\(gameLevelData.colorBookSelect)/5)")
+                                        .font(.system(size: 23))
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Text("Select color you like! (5/5) Completed!")
+                                        .font(.system(size: 23))
+                                        .foregroundColor(.gray)
+                                }
+                                
+                                Spacer()
                                 
                                 Button(action: { ColorBookView.toggle() }) {
                                     Image(systemName: "xmark.circle.fill")
@@ -125,10 +138,10 @@ struct ThaiToneCardView: View {
                                 }
                                 .buttonStyle(.borderless)
                             }
+                            .padding(.horizontal, 50)
                             TTColorBookView()
                         }
                     }
-                    
                 } else {
                     
                     DisableCardView(titlecard: "???", subtitlecard: "take a look", iconcard: "lock.fill", cardimage: "", shadowcard: 10)

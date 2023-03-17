@@ -212,5 +212,15 @@ class GameLevelData: ObservableObject {
         }
     }
     
+    @Published var colorBookSelect: Int = 0 {
+        didSet {
+            if (colorBookSelect == 5) {
+                unlocklevel()
+            }
+            print("colorBookSelect data changed")
+            print(colorBookSelect)
+        }
+    }
+    
 }
 
