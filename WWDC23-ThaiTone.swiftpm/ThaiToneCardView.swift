@@ -105,26 +105,28 @@ struct ThaiToneCardView: View {
                         CardView(titlecard: "ThaiTone Color Book", subtitlecard: "Take a look", iconcard: "play.fill", cardimage: "Art-2", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ColorBookView, onDismiss: didDismiss) {
-                        HStack {
-                            VStack {
-                                Text("take a look")
-                                    .font(.subheadline)
-                                    .textCase(.uppercase)
-                                    .frame(width: 400, alignment: .leading)
-                                Text("ThaiTone Colors Book")
-                                    .font(.system(size: 36, weight: .bold))
-                                    .frame(width: 400, alignment: .leading)
+                        ScrollView {
+                            HStack {
+                                VStack {
+                                    Text("take a look")
+                                        .font(.subheadline)
+                                        .textCase(.uppercase)
+                                        .frame(width: 400, alignment: .leading)
+                                    Text("ThaiTone colors book")
+                                        .font(.system(size: 36, weight: .bold))
+                                        .frame(width: 400, alignment: .leading)
+                                }
+                                .frame(width: 1060, height: 120, alignment: .leading)
+                                
+                                Button(action: { ColorBookView.toggle() }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .font(.system(size: 32))
+                                        .foregroundColor(.gray)
+                                }
+                                .buttonStyle(.borderless)
                             }
-                            .frame(width: 1060, height: 120, alignment: .leading)
-                            
-                            Button(action: { ColorBookView.toggle() }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.gray)
-                            }
-                            .buttonStyle(.borderless)
+                            TTColorBookView()
                         }
-                        //                    WhatThaiToneScene() //ChangeView
                     }
                     
                 } else {
