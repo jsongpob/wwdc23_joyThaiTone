@@ -76,7 +76,7 @@ struct ThaiToneCardView: View {
                             .frame(width: 1060, height: 120, alignment: .leading)
                             
                             Button(action: {
-                                if (gameLevelData.wttsUnlockLevel >= 4) {
+                                if (gameLevelData.wttsUnlockLevel == 4 && gameLevelData.wttscompleted != true) {
                                     gameLevelData.wttscompleted = true
                                     print("wttscompleted = true")
                                 }
@@ -117,21 +117,28 @@ struct ThaiToneCardView: View {
                                         .frame(width: 400, alignment: .leading)
                                 }
                                 .frame(width: 400, height: 120, alignment: .leading)
-                                .border(.red)
-                                
-                                if (gameLevelData.colorBookSelect < 5) {
-                                    Text("Select color you like! (\(gameLevelData.colorBookSelect)/5)")
-                                        .font(.system(size: 23))
-                                        .foregroundColor(.gray)
-                                } else {
-                                    Text("Select color you like! (5/5) Completed!")
-                                        .font(.system(size: 23))
-                                        .foregroundColor(.gray)
-                                }
                                 
                                 Spacer()
                                 
-                                Button(action: { ColorBookView.toggle() }) {
+                                if (gameLevelData.colorBookSelect < 5) {
+                                    Text("Select color you like! (\(gameLevelData.colorBookSelect)/5)")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.gray)
+                                        .frame(width: 400, alignment: .trailing)
+                                } else {
+                                    Text("Select color you like! (5/5) Completed!")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.gray)
+                                        .frame(width: 400, alignment: .trailing)
+                                }
+                                
+                                Button(action: {
+                                    if (gameLevelData.colorBookSelect == 5 && gameLevelData.TTcolorcompleted != true) {
+                                        gameLevelData.TTcolorcompleted = true
+                                        gameLevelData.unlocklevel()
+                                    }
+                                    ColorBookView.toggle()
+                                }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .font(.system(size: 32))
                                         .foregroundColor(.gray)

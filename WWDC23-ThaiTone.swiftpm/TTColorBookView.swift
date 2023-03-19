@@ -200,18 +200,18 @@ struct TTColorBookView: View {
                         Color(hex: color.hex)
                             .frame(width: 170, height: 170)
                             .cornerRadius(15)
-//                            .shadow(radius: 10)
-                            .overlay{
-                                VStack {
-                                    Text(color.name)
-                                        .font(.title3.bold())
-                                        .foregroundColor(.white)
-                                }
-                            }
                             .onTapGesture {
                                 selectedColor = color
                                 gameLevelData.colorBookSelect += 1
                             }
+                        //                            .shadow(radius: 10)
+                        //                            .overlay{
+                        VStack {
+                            Text(color.name)
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                        //                            }
                     }
                 }
             }
@@ -234,6 +234,8 @@ struct TTColorBookView_Previews: PreviewProvider {
 
 //View Detail Sheet
 struct ColorDetailView: View {
+    @State var ctcb: Color = .gray
+    @State var ctcbalert: String = ""
     let name: String
     var hex: String
     
@@ -241,13 +243,21 @@ struct ColorDetailView: View {
         VStack(spacing: 20) {
             Text(name)
                 .font(.largeTitle.bold())
-                .foregroundColor(Color(hex: hex))
-            Text(hex)
-                .onTapGesture {
-                    UIPasteboard.general.string = self.hex
-                }
-                .font(.title)
-                .foregroundColor(.gray)
+                .foregroundColor(.black)
+            HStack {
+                Text(hex)
+                    .font(.title)
+                    .foregroundColor(.gray)
+                Image(systemName: "doc.on.clipboard")
+                    .foregroundColor(ctcb)
+                Text(ctcbalert)
+                    .foregroundColor(Color(hex: hex))
+            }
+            .onTapGesture {
+                ctcb = Color(hex: hex)
+                ctcbalert = "Color Copied"
+                UIPasteboard.general.string = self.hex
+            }
             Rectangle()
                 .frame(width: 600, height: 500)
                 .foregroundColor(Color(hex: hex))

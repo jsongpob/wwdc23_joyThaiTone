@@ -112,6 +112,7 @@ class GameLevelData: ObservableObject {
         FirstWelcomeView = true
         wttsResetUnlock()
         wttscompleted = false
+        colorBookSelect = 0
     }
     
     //FUNC to check WelcomeView it's show only on first time and store user data
@@ -212,13 +213,19 @@ class GameLevelData: ObservableObject {
         }
     }
     
-    @Published var colorBookSelect: Int = 0 {
+    var TTcolorcompleted = UserDefaults.standard.bool(forKey: "TTcolorcompleted") {
         didSet {
-            if (colorBookSelect == 5) {
-                unlocklevel()
-            }
-            print("colorBookSelect data changed")
-            print(colorBookSelect)
+            UserDefaults.standard.set(TTcolorcompleted, forKey: "TTcolorcompleted")
+        }
+    }
+    @Published var colorBookSelect: Int = UserDefaults.standard.integer(forKey: "colorBookSelect") {
+        didSet {
+            UserDefaults.standard.set(colorBookSelect, forKey: "colorBookSelect")
+//            if (colorBookSelect == 5) {
+//                unlocklevel()
+//            }
+//            print("colorBookSelect data changed")
+//            print(colorBookSelect)
         }
     }
     
