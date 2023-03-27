@@ -37,10 +37,10 @@ struct WhatThaiToneScene: View {
             //            .frame(width: 1100, height: 100, alignment: .leading)
             //            .offset(x: 0.0,y: -120.0)
             
-            VStack(spacing: 30) {
+            VStack(spacing: 20) {
 //                Text("wttsUnlockLevel:\(gameLevelData.wttsUnlockLevel) wttsTest:\(gameLevelData.wttsUnlockLevelState) wttsprogress:\(gameLevelData.wttsProgress)")
                 //LINE-1
-                HStack(spacing: 30) {
+                HStack(spacing: 20) {
                     
                     //PAGE-1
                     Button(action:
@@ -50,16 +50,28 @@ struct WhatThaiToneScene: View {
                         gameLevelData.wttsUnlock1()
                     })
                     {
-                        WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "Art-1", shadowWcard: 16, Xcard: 450, Ycard: 320)
+                        WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "Art-1", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                     }
-                    .sheet(isPresented: $isShowingSheetA, onDismiss: didDismiss) {
-                        Button(action: { isShowingSheetA.toggle() }) {
-                            Text("Dismiss")
+                    .fullScreenCover(isPresented: $isShowingSheetA, onDismiss: didDismiss) {
+                        VStack {
+                            Button(action: { isShowingSheetA.toggle() }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.horizontal, 30)
+                            
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack {
+                                    Wttv1()
+                                }
+                            }
+                            .border(.red)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        .buttonStyle(.bordered)
                     }
                     //END PAGE-1
-                    
                     //PAGE-2
                     Button(action:
                     {
@@ -69,7 +81,7 @@ struct WhatThaiToneScene: View {
                     })
                     {
                         VStack {
-                            WideCardView(titleWcard: titleWcardList[1], iconWcard: "", Wcardimage: "Art-2", shadowWcard: 16, Xcard: 620, Ycard: 320)
+                            WideCardView(titleWcard: titleWcardList[1], iconWcard: "", Wcardimage: "Art-2", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -81,10 +93,9 @@ struct WhatThaiToneScene: View {
                     }//END PAGE-2
                     
                 }
-                .frame(width: 1100, height: 320, alignment: .topLeading)
                 
                 //LINE-2
-                HStack(spacing: 30) {
+                HStack(spacing: 20) {
                     
                     //PAGE-3
                     Button(action:
@@ -95,7 +106,7 @@ struct WhatThaiToneScene: View {
                     })
                     {
                         VStack {
-                            WideCardView(titleWcard: titleWcardList[2], iconWcard: "", Wcardimage: "Art-3", shadowWcard: 16, Xcard: 550, Ycard: 200)
+                            WideCardView(titleWcard: titleWcardList[2], iconWcard: "", Wcardimage: "Art-3", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -115,7 +126,7 @@ struct WhatThaiToneScene: View {
                     })
                     {
                         VStack {
-                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, Xcard: 1040/2, Ycard: 200)
+                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -126,11 +137,11 @@ struct WhatThaiToneScene: View {
                         .buttonStyle(.bordered)
                     }//END PAGE-3
                 }
-                .frame(width: 1100, height: 200, alignment: .topLeading)
-                .scaledToFit()
             }
-            .frame(width: 1100, alignment: .leading)
+            .padding(40)
+//            .border(.red)
         }
+        
     }
     func wttsprogresscompleted1() {
         if (gameLevelData.wttsCard1 == false) {

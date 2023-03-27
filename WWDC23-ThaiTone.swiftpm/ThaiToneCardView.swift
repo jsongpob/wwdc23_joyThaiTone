@@ -73,7 +73,9 @@ struct ThaiToneCardView: View {
                                     .font(.system(size: 36, weight: .bold))
                                     .frame(width: 400, alignment: .leading)
                             }
-                            .frame(width: 1060, height: 120, alignment: .leading)
+                            .frame(width: 400, height: 120, alignment: .leading)
+                            
+                            Spacer()
                             
                             Button(action: {
                                 if (gameLevelData.wttsUnlockLevel == 4 && gameLevelData.wttscompleted != true) {
@@ -89,6 +91,7 @@ struct ThaiToneCardView: View {
                             }
                             .buttonStyle(.borderless)
                         }
+                        .padding(.horizontal, 50)
                         WhatThaiToneScene().environmentObject(gameLevelData)
                     }
                     

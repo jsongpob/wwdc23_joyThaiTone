@@ -14,17 +14,21 @@ struct WideCardView: View {
     var Wcardimage: String
     var shadowWcard: Int
     
-    var Xcard: Int
-    var Ycard: Int
+    var MinW: CGFloat
+    var IdW: CGFloat
+    var MaxW: CGFloat
+    var MinH: CGFloat
+    var IdH: CGFloat
+    var MaxH: CGFloat
     
     var body: some View {
         VStack {
             Image(Wcardimage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: CGFloat(Xcard), height: CGFloat(Ycard), alignment: .center)
+                .frame(minWidth: MinW, idealWidth: IdW, maxWidth: MaxW, minHeight: MinH, idealHeight: IdH, maxHeight: MaxH)
                 .clipped()
-                .overlay(Text(titleWcard).font(.system(size: 38, weight: .bold)).foregroundColor(.white).frame(width: CGFloat(Xcard-40), height: CGFloat(Ycard-40), alignment: .bottomLeading))
+                .overlay(Text(titleWcard).font(.system(size: 38, weight: .bold)).foregroundColor(.white).frame(maxWidth: MaxW, maxHeight: MaxH, alignment: .bottomLeading).padding(30))
         }
         .background(.white)
         .cornerRadius(15)
@@ -34,7 +38,7 @@ struct WideCardView: View {
 
 struct WideCardView_Previews: PreviewProvider {
     static var previews: some View {
-        WideCardView(titleWcard: "What's ThaiTone", iconWcard: "", Wcardimage: "Art-1", shadowWcard: 32, Xcard: 400, Ycard: 300)
+        WideCardView(titleWcard: "What's ThaiTone", iconWcard: "", Wcardimage: "art-1", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: 100, MinH: 100, IdH: 100, MaxH: 100)
             .previewInterfaceOrientation(.landscapeRight)
     }
 }
