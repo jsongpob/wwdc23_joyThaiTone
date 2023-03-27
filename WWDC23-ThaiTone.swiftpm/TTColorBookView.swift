@@ -194,11 +194,11 @@ struct TTColorBookView: View {
     //View
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6), spacing: 15) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 15) {
                 ForEach(colors) { color in
                     VStack {
                         Color(hex: color.hex)
-                            .frame(width: 170, height: 170)
+                            .frame(minWidth: 170, idealWidth: 200, maxWidth: .infinity, minHeight: 170, idealHeight: 200, maxHeight: .infinity)
                             .cornerRadius(15)
                             .onTapGesture {
                                 selectedColor = color
@@ -215,7 +215,7 @@ struct TTColorBookView: View {
                     }
                 }
             }
-            .padding(.horizontal, 45)
+            .padding(.horizontal, 40)
         }
         .sheet(item: $selectedColor) { color in
             ColorDetailView(name: color.name, hex: color.hex)
@@ -240,30 +240,32 @@ struct ColorDetailView: View {
     var hex: String
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text(name)
-                .font(.largeTitle.bold())
-                .foregroundColor(.black)
-            HStack {
-                Text(hex)
-                    .font(.title)
-                    .foregroundColor(.gray)
-                Image(systemName: "doc.on.clipboard")
-                    .foregroundColor(ctcb)
-                Text(ctcbalert)
-                    .foregroundColor(Color(hex: hex))
-            }
-            .onTapGesture {
-                ctcb = Color(hex: hex)
-                ctcbalert = "Color Copied"
-                UIPasteboard.general.string = self.hex
+        VStack {
+            VStack {
+                Text(name)
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.black)
+                HStack {
+                    Text(hex)
+                        .font(.title)
+                        .foregroundColor(.gray)
+                    Image(systemName: "doc.on.clipboard")
+                        .foregroundColor(ctcb)
+                    Text(ctcbalert)
+                        .foregroundColor(Color(hex: hex))
+                }
+                .onTapGesture {
+                    ctcb = Color(hex: hex)
+                    ctcbalert = "Color Copied"
+                    UIPasteboard.general.string = self.hex
+                }
             }
             Rectangle()
-                .frame(width: 600, height: 500)
+                .frame(minWidth: 600, idealWidth: 600, maxWidth: .infinity, minHeight: 600, idealHeight: 600, maxHeight: .infinity)
                 .foregroundColor(Color(hex: hex))
-                .cornerRadius(15)
+                .cornerRadius(10)
         }
-        .padding()
+        .padding(40)
     }
 }
 

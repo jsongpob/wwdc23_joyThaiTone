@@ -18,7 +18,7 @@ struct WhatThaiToneScene: View {
 //    @StateObject var wttsstate = wttsState()
     @StateObject var appstatedata = GameLevelData()
     
-    @State var titleWcardList = ["What's ThaiTone", "Thai Inspiration", "Topic Name", "Thai Cultures"]
+    @State var titleWcardList = ["Inspiration of \nThai-tone colors", "Originator of modern Thai colors", "Origins of ThaiTone colors", ""]
     
     //    @ObservedObject var ThaiToneView = ThaiToneCardView.ThaiToneView
     
@@ -117,25 +117,25 @@ struct WhatThaiToneScene: View {
                         .buttonStyle(.bordered)
                     }//END PAGE-3
                     
-                    //PAGE-3
-                    Button(action:
-                    {
-                        isShowingSheetB.toggle()
-//                        wttsprogresscompleted4()
-                        gameLevelData.wttsUnlock4()
-                    })
-                    {
-                        VStack {
-                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                    }
-                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
-                        Button(action: { isShowingSheetB.toggle() }) {
-                            Text("Dismiss")
-                        }
-                        .buttonStyle(.bordered)
-                    }//END PAGE-3
+//                    //PAGE-3
+//                    Button(action:
+//                    {
+//                        isShowingSheetB.toggle()
+////                        wttsprogresscompleted4()
+//                        gameLevelData.wttsUnlock4()
+//                    })
+//                    {
+//                        VStack {
+//                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
+//                        }
+//                        .buttonStyle(.borderedProminent)
+//                    }
+//                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
+//                        Button(action: { isShowingSheetB.toggle() }) {
+//                            Text("Dismiss")
+//                        }
+//                        .buttonStyle(.bordered)
+//                    }//END PAGE-3
                 }
             }
             .padding(40)
@@ -158,11 +158,11 @@ struct WhatThaiToneScene: View {
             gameLevelData.wttsProgress += 1
         }
     }
-    func wttsprogresscompleted4() {
-        if (gameLevelData.wttsCard4 == false) {
-            gameLevelData.wttsProgress += 1
-        }
-    }
+//    func wttsprogresscompleted4() {
+//        if (gameLevelData.wttsCard4 == false) {
+//            gameLevelData.wttsProgress += 1
+//        }
+//    }
 }
 
 

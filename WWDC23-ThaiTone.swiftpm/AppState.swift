@@ -49,11 +49,11 @@ class GameLevelData: ObservableObject {
         didSet {
             UserDefaults.standard.set(wttsProgress, forKey: "wttsProgress")
             
-            if (wttsProgress == 4) {
+            if (wttsProgress == 3) {
                 unlocklevel()
 //                print("\(wttsProgress) :wttsProgress")
-            } else if (wttsProgress >= 5) {
-                wttsProgress = 4
+            } else if (wttsProgress >= 4) {
+                wttsProgress = 3
             }
         }
     }
@@ -113,6 +113,7 @@ class GameLevelData: ObservableObject {
         wttsResetUnlock()
         wttscompleted = false
         colorBookSelect = 0
+        TTcolorcompleted = false
     }
     
     //FUNC to check WelcomeView it's show only on first time and store user data
@@ -130,7 +131,7 @@ class GameLevelData: ObservableObject {
         didSet {
 //            print("\(wttsUnlockLevel)")
             UserDefaults.standard.set(wttsUnlockLevel, forKey: "wttsUnlockLevelData")
-            if (wttsUnlockLevel >= 4) {
+            if (wttsUnlockLevel >= 3) {
 //                wttscompleted = true
 //                print("wttscompleted: \(wttscompleted)")
             }
@@ -170,12 +171,12 @@ class GameLevelData: ObservableObject {
         }
     }
     //
-    @Published var wttsCard4: Bool = UserDefaults.standard.bool(forKey: "wttsCard4") {
-        didSet {
-            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard4")
-//            print("wttsCard4: \(wttsCard4)")
-        }
-    }
+//    @Published var wttsCard4: Bool = UserDefaults.standard.bool(forKey: "wttsCard4") {
+//        didSet {
+//            UserDefaults.standard.set(wttsCard1, forKey: "wttsCard4")
+////            print("wttsCard4: \(wttsCard4)")
+//        }
+//    }
     //
     @Published var wttsprogresscompleted: Int = 0
     
@@ -185,7 +186,7 @@ class GameLevelData: ObservableObject {
         wttsCard1 = false
         wttsCard2 = false
         wttsCard3 = false
-        wttsCard4 = false
+//        wttsCard4 = false
     }
     
     func wttsUnlock1() {
@@ -206,12 +207,12 @@ class GameLevelData: ObservableObject {
             wttsCard3 = true
         }
     }
-    func wttsUnlock4() {
-        if (wttsCard4 == false) {
-            wttsUnlockLevel += 1
-            wttsCard4 = true
-        }
-    }
+//    func wttsUnlock4() {
+//        if (wttsCard4 == false) {
+//            wttsUnlockLevel += 1
+//            wttsCard4 = true
+//        }
+//    }
     
     var TTcolorcompleted = UserDefaults.standard.bool(forKey: "TTcolorcompleted") {
         didSet {
@@ -225,7 +226,8 @@ class GameLevelData: ObservableObject {
 //                unlocklevel()
 //            }
 //            print("colorBookSelect data changed")
-//            print(colorBookSelect)
+            print(colorBookSelect)
+            print(TTcolorcompleted)
         }
     }
     

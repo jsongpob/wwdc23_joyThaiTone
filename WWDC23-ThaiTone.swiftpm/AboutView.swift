@@ -13,12 +13,10 @@ struct AboutView: View {
             //TITLE
             Text("About this project")
                 .font(.subheadline)
-                .padding(.top, 100)
             Text("ThaiTone")
-                .font(.system(size: 72, weight: .medium))
-            
+                .font(.system(size: 89, weight: .medium))
             //CONTENT
-            ScrollView(showsIndicators: false) {
+            VStack {
                 VStack(spacing: 40) {
                     CallCardView(callicon: "swift", calltext: "Vestibulum viverra lorem odio. Ut in risus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim nibh tincidunt tortor congue pretium. Sed consectetur risus nec dui ultrices, sit amet maximus lacus lacinia. Aliquam auctor id ex vitae placerat. Nullam elit est, pulvinar sed felis eget, vestibulum suscipit nisi. Phasellus sagittis efficitur metus."
                     )
@@ -28,6 +26,7 @@ struct AboutView: View {
                     )
                 }
             }
+            .padding(.horizontal, 60)
         }
     }
 }
@@ -35,7 +34,7 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         AboutView()
-            .previewInterfaceOrientation(.landscapeRight)
+//            .previewInterfaceOrientation(.landscapeRight)
     }
 }
 
@@ -48,11 +47,12 @@ struct CallCardView: View {
         HStack {
             Image(systemName: callicon)
                 .foregroundColor(.blue)
-                .frame(width: 200, height: 100, alignment: .center)
+                .frame(width: 100, height: 100, alignment: .center)
                 .font(.system(size: 48))
             Text(calltext)
                 .font(.body)
-                .frame(width: 700, alignment: .leading)
+                .multilineTextAlignment(.leading)
+//                .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, minHeight: 100, idealHeight: 100, maxHeight: .infinity, alignment: .leading)
         }
     }
 }

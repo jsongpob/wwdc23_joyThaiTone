@@ -26,6 +26,7 @@ struct ClearView: View {
                                 .frame(width: 250, height: 30)
                         }
                         .buttonStyle(.borderedProminent)
+                        Spacer()
                         
                     }
                     .frame(maxWidth: .infinity,
@@ -69,7 +70,8 @@ func didDismiss() {
 
 struct WelcomeView: View {
     var body: some View {
-        VStack(spacing: 50) {
+        Spacer()
+        VStack(spacing: 20) {
             Text("Welcome to")
             Text("ThaiTone")
                 .font(.system(size: 120, weight: .medium))

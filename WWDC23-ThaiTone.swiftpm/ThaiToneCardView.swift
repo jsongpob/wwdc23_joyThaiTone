@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThaiToneCardView: View {
     @EnvironmentObject var gameLevelData: GameLevelData
-//    @EnvironmentObject var wttsstate: wttsState
+    //    @EnvironmentObject var wttsstate: wttsState
     
     let gameUnlock = [true, false, false]
     let iconLock = ["lock.fill", "play.fill"]
@@ -21,42 +21,66 @@ struct ThaiToneCardView: View {
     @State private var ThaiToneView = false
     @State private var ColorBookView = false
     @State private var FindGameView = false
-
+    
     var body: some View {
         VStack {
+            Spacer()
+            
+            //TITLE
             VStack {
                 Text("ThaiTone")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.system(size: 48, weight: .bold))
                 Text("Play and learn to unlock. Have fun!")
-//                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
-                Text("\(gameLevelData.GameLevel) :gameLevel")
-//                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
-                HStack {
-                    Button(action: {
-                        gameLevelData.unlocklevel()
-                    }) {
-                        Text("Click")
-                    }
-                    Button(action: {
-                        gameLevelData.gamereset()
-                    }) {
-                        Text("Reset")
-                    }
-                    Button(action: {
-                        gameLevelData.FirstWelcomeView = true
-                    }) {
-                        Text("showWelcomeView")
-                    }
-                }
+                    .font(.title2)
+                
+                //DEBUG TEXTVIEW
+//                HStack {
+//                    //                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
+//                    Text("\(gameLevelData.GameLevel) :gameLevel")
+//                    //                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
+//                    Button(action: {
+//                        gameLevelData.unlocklevel()
+//                    }) {
+//                        Text("Click")
+//                    }
+//                    Button(action: {
+//                        gameLevelData.gamereset()
+//                    }) {
+//                        Text("Reset")
+//                    }
+//                    Button(action: {
+//                        gameLevelData.FirstWelcomeView = true
+//                    }) {
+//                        Text("showWelcomeView")
+//                    }
+//                }
+                //DEBUG TEXTVIEW
             }
             .environmentObject(GameLevelData())
-
+            
             //            .frame(width: .infinity, height: 140, alignment: .center)
-            .padding(.bottom, 60)
             
             //CARD
-            HStack(spacing: 30) {
-                
+            //            HStack(spacing: 30)
+            //            let flexColumns: [GridItem] = [
+            //                GridItem(.flexible()),
+            //                GridItem(.flexible()),
+            //                GridItem(.flexible())
+            //            ]
+            
+            let adaptiveColumns = [
+                GridItem(.adaptive(minimum: 220, maximum: 260), spacing: 100, alignment: .center)
+            ]
+            //            let fixedColumns = [
+            //                GridItem(.fixed(330)),
+            //                GridItem(.fixed(330)),
+            //                GridItem(.fixed(330))
+            //            ]
+            
+            Spacer()
+            
+            //CONTENT CARD
+            LazyVGrid(columns: adaptiveColumns, alignment: .center, spacing: 50) {
                 if (gameLevelData.GameLevel >= 1) {
                     //CARD LEARN
                     Button(action: { ThaiToneView.toggle() }) {
@@ -78,7 +102,7 @@ struct ThaiToneCardView: View {
                             Spacer()
                             
                             Button(action: {
-                                if (gameLevelData.wttsUnlockLevel == 4 && gameLevelData.wttscompleted != true) {
+                                if (gameLevelData.wttsUnlockLevel == 3 && gameLevelData.wttscompleted != true) {
                                     gameLevelData.wttscompleted = true
                                     print("wttscompleted = true")
                                 }
@@ -94,12 +118,10 @@ struct ThaiToneCardView: View {
                         .padding(.horizontal, 50)
                         WhatThaiToneScene().environmentObject(gameLevelData)
                     }
-                    
                 } else {
-                    
                     DisableCardView(titlecard: "???", subtitlecard: "learn", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
-                    
                 }
+                
                 
                 if (gameLevelData.GameLevel >= 2) {
                     
@@ -127,16 +149,16 @@ struct ThaiToneCardView: View {
                                     Text("Select color you like! (\(gameLevelData.colorBookSelect)/5)")
                                         .font(.system(size: 18))
                                         .foregroundColor(.gray)
-                                        .frame(width: 400, alignment: .trailing)
+                                        .frame(width: 320, alignment: .trailing)
                                 } else {
                                     Text("Select color you like! (5/5) Completed!")
                                         .font(.system(size: 18))
                                         .foregroundColor(.gray)
-                                        .frame(width: 400, alignment: .trailing)
+                                        .frame(width: 320, alignment: .trailing)
                                 }
                                 
                                 Button(action: {
-                                    if (gameLevelData.colorBookSelect == 5 && gameLevelData.TTcolorcompleted != true) {
+                                    if (gameLevelData.colorBookSelect >= 5 && gameLevelData.TTcolorcompleted != true) {
                                         gameLevelData.TTcolorcompleted = true
                                         gameLevelData.unlocklevel()
                                     }
@@ -199,15 +221,18 @@ struct ThaiToneCardView: View {
                 }
             })
             .padding([.leading, .trailing], 100)
-            .padding(.bottom, 50)
+            //            .padding(.bottom, 50)
             
-            ProgressView(value: Float(gameLevelData.GameProgress)) {
-                Text("\(Int(gameLevelData.GameProgress*100))% completed (Temporary Debug)")
-                    .frame(width: 333)
-                    .font(.subheadline)
-            }
-            .padding([.leading,.trailing], 430)
-            .progressViewStyle(.automatic)
+            Spacer()
+            
+            //            ProgressView(value: Float(gameLevelData.GameProgress)) {
+            //                Text("\(Int(gameLevelData.GameProgress*100))% completed (Temporary Debug)")
+            //                    .frame(width: 333)
+            //                    .font(.subheadline)
+            //            }
+            //            .padding([.leading,.trailing], 430)
+            //            .progressViewStyle(.automatic)
+            Spacer()
         }
     }
 }

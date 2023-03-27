@@ -28,7 +28,12 @@ struct WideCardView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(minWidth: MinW, idealWidth: IdW, maxWidth: MaxW, minHeight: MinH, idealHeight: IdH, maxHeight: MaxH)
                 .clipped()
-                .overlay(Text(titleWcard).font(.system(size: 38, weight: .bold)).foregroundColor(.white).frame(maxWidth: MaxW, maxHeight: MaxH, alignment: .bottomLeading).padding(30))
+                .overlay(Text(titleWcard)
+                    .font(.system(size: 38, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: MaxW, maxHeight: MaxH, alignment: .bottomLeading)
+                    .multilineTextAlignment(.leading)
+                    .padding(30))
         }
         .background(.white)
         .cornerRadius(15)
