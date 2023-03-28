@@ -53,22 +53,21 @@ struct WhatThaiToneScene: View {
                         WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "Art-1", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                     }
                     .fullScreenCover(isPresented: $isShowingSheetA, onDismiss: didDismiss) {
-                        VStack {
+                        ZStack {
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack {
+                                    LearningInspiration()
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            
                             Button(action: { isShowingSheetA.toggle() }) {
                                 Image(systemName: "xmark.circle.fill")
                                     .font(.system(size: 32))
                                     .foregroundColor(.gray)
                             }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.horizontal, 30)
-                            
-                            ScrollView(.horizontal, showsIndicators: true) {
-                                HStack {
-                                    Wttv1()
-                                }
-                            }
-                            .border(.red)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding(30)
                         }
                     }
                     //END PAGE-1

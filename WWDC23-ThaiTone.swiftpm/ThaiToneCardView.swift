@@ -34,26 +34,26 @@ struct ThaiToneCardView: View {
                     .font(.title2)
                 
                 //DEBUG TEXTVIEW
-//                HStack {
-//                    //                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
-//                    Text("\(gameLevelData.GameLevel) :gameLevel")
-//                    //                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
-//                    Button(action: {
-//                        gameLevelData.unlocklevel()
-//                    }) {
-//                        Text("Click")
-//                    }
-//                    Button(action: {
-//                        gameLevelData.gamereset()
-//                    }) {
-//                        Text("Reset")
-//                    }
-//                    Button(action: {
-//                        gameLevelData.FirstWelcomeView = true
-//                    }) {
-//                        Text("showWelcomeView")
-//                    }
-//                }
+                HStack {
+                    //                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
+                    Text("\(gameLevelData.GameLevel) :gameLevel")
+                    //                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
+                    Button(action: {
+                        gameLevelData.unlocklevel()
+                    }) {
+                        Text("Click")
+                    }
+                    Button(action: {
+                        gameLevelData.gamereset()
+                    }) {
+                        Text("Reset")
+                    }
+                    Button(action: {
+                        gameLevelData.FirstWelcomeView = true
+                    }) {
+                        Text("showWelcomeView")
+                    }
+                }
                 //DEBUG TEXTVIEW
             }
             .environmentObject(GameLevelData())

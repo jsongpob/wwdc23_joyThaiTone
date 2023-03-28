@@ -209,7 +209,7 @@ struct TTColorBookView: View {
                         VStack {
                             Text(color.name)
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(.black)
+//                                .foregroundColor(.black)
                         }
                         //                            }
                     }
@@ -244,7 +244,7 @@ struct ColorDetailView: View {
             VStack {
                 Text(name)
                     .font(.largeTitle.bold())
-                    .foregroundColor(.black)
+//                    .foregroundColor(.black)
                 HStack {
                     Text(hex)
                         .font(.title)

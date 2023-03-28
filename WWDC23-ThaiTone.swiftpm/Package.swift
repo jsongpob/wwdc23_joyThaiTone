@@ -16,7 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "WWDC23-ThaiTone",
             targets: ["AppModule"],
-            bundleIdentifier: "th.ac.su.hamthanan.s.WWDC23-ThaiTone",
+            bundleIdentifier: "th.ac.su.hamthanan.s.thaitone",
+            teamIdentifier: "AWK828SHGV",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .palette),
