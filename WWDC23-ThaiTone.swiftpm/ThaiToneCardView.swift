@@ -187,26 +187,30 @@ struct ThaiToneCardView: View {
                         CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "play.fill", cardimage: "Art-3", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $FindGameView, onDismiss: didDismiss) {
-                        HStack {
-                            VStack {
-                                Text("play")
-                                    .font(.subheadline)
-                                    .textCase(.uppercase)
-                                    .frame(width: 400, alignment: .leading)
-                                Text("Find ThaiTone")
-                                    .font(.system(size: 36, weight: .bold))
-                                    .frame(width: 400, alignment: .leading)
+                        ZStack {
+                            HStack {
+//                                VStack {
+//                                    Text("play")
+//                                        .font(.subheadline)
+//                                        .textCase(.uppercase)
+//                                        .frame(width: 400, alignment: .leading)
+//                                    Text("Find ThaiTone")
+//                                        .font(.system(size: 36, weight: .bold))
+//                                        .frame(width: 400, alignment: .leading)
+//                                }
+//                                .frame(width: 400, height: 120, alignment: .leading)
+//                                Spacer()
+                                Button(action: { FindGameView.toggle() }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .font(.system(size: 32))
+                                        .foregroundColor(.gray)
+                                }
+                                .buttonStyle(.borderless)
                             }
-                            .frame(width: 1060, height: 120, alignment: .leading)
-                            
-                            Button(action: { FindGameView.toggle() }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.gray)
-                            }
-                            .buttonStyle(.borderless)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding(30)
+                            GameView()
                         }
-                        //                    WhatThaiToneScene() //ChangeView
                     }
                     
                 } else {

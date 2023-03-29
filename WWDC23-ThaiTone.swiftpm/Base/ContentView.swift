@@ -6,6 +6,7 @@ struct ContentView: View {
 //            Text("DO NOT USE THIS VIEW / PREVIEW ONLY")
             ClearView()
                 .environmentObject(GameLevelData())
+                .environmentObject(GameState())
         }
     }
 }

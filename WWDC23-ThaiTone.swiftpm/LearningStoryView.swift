@@ -183,6 +183,13 @@ struct LearningOriginator: View {
     }
 }
 
+//Story3
+struct LearningOrigins: View {
+    var body: some View {
+        Text("Hello World")
+    }
+}
+
 struct LearningStoryView_Previews: PreviewProvider {
     static var previews: some View {
         LearningInspiration()

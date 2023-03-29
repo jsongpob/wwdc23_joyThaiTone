@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "WWDC23-ThaiTone",
+    name: "ThaiTone",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "WWDC23-ThaiTone",
+            name: "ThaiTone",
             targets: ["AppModule"],
             bundleIdentifier: "th.ac.su.hamthanan.s.thaitone",
             teamIdentifier: "AWK828SHGV",
