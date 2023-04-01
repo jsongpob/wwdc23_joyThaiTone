@@ -10,6 +10,11 @@ import SwiftUI
 
 class GameState: ObservableObject {
     
+    @Published var gameIsNormalModeShowing = false
+    @Published var gameIsHardModeShowing = false
+    @Published var isModeSelectShowingSheet = false
+    @Published var isEndGameViewShowingSheet = false
+
     //COUNTDOWN
     @Published var countDownTimer = 8 {
         didSet {
@@ -32,10 +37,57 @@ class GameState: ObservableObject {
     }
     //END FUNCTION COUNTDOWN
     
+    //GAME RESET
+    func gameReset() {
+        countDownTimer = 8
+        gameStarted = false
+        gameMode = 0
+        gameTimerStop()
+        Endgame = false
+    }
+    @Published var cancelGameDisable = false
+    func cancelGame() {
+        cancelGameDisable = false
+    }
+    
     //GAMEPLAY
-    @Published var gameStarted = false {
+    @Published var gameStarted = false
+    @Published var gameMode = 0
+    
+    //GAME-STARTING SETUP
+    
+    //GAME-TIMER
+    @Published var gameTotalTimerCountDown: Float = 30.0
+    @Published var gameTimerCountDown: Float = 30.0 {
         didSet {
-            print("gameStarted = \(gameStarted)")
+            print("gameTimerCountDown = \(gameTimerCountDown)/\(gameTotalTimerCountDown)")
+            if (gameTimerCountDown == 0) {
+                Endgame = true
+                gameIsNormalModeShowing = false
+                isModeSelectShowingSheet = false
+                isEndGameViewShowingSheet = true
+                gameReset()
+            }
         }
     }
+    @State private var gametimer: Timer?
+    
+    func gameTimer() {
+        gametimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { gametimer in
+            if (self.gameTimerCountDown > 0) {
+                self.gameTimerCountDown -= 1
+            } else {
+                gametimer.invalidate()
+            }
+        }
+    }
+    func gameTimerStop() {
+        gametimer?.invalidate()
+        gameTimerCountDown = -1
+        gametimer = nil
+    }
+    
+    //END GAME SETUP
+    @Published var Endgame = false
+    
 }

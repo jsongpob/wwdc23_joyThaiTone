@@ -13,9 +13,10 @@ struct GameView: View {
     //SHEET ACTION
     @State private var isHowtoShowingSheet = false
     @State private var isLeaderShowingSheet = false
-    @State private var isModeSelectShowingSheet = false
+    //    @State private var isModeSelectShowingSheet = false
     
-    @State private var gameIsNormalModeShowing = false
+    //    @State private var gameIsNormalModeShowing = false
+    //    @State private var gameIsHardModeShowing = false
     
     var body: some View {
         
@@ -38,9 +39,9 @@ struct GameView: View {
             }
             .environmentObject(GameState())
             .onTapGesture {
-                isModeSelectShowingSheet.toggle()
+                gameState.isModeSelectShowingSheet.toggle()
             }
-            .fullScreenCover(isPresented: $isModeSelectShowingSheet) {
+            .fullScreenCover(isPresented: $gameState.isModeSelectShowingSheet) {
                 //SELECT MODE TO PLAY
                 ZStack {
                     VStack(spacing: 30) {
@@ -53,30 +54,31 @@ struct GameView: View {
                             
                             //NORMAL
                             Button {
-                                gameIsNormalModeShowing.toggle()
+                                gameState.gameIsNormalModeShowing.toggle()
+                                gameState.gameMode = 1
                             } label: {
                                 Text("Normal")
                                     .font(.title)
                                     .frame(width: 290, height: 50, alignment: .center)
                             }
                             .buttonStyle(.borderedProminent)
-                            .fullScreenCover(isPresented: $gameIsNormalModeShowing) {
+                            .fullScreenCover(isPresented: $gameState.gameIsNormalModeShowing) {
                                 //CLOSE IN-GAME FULLSCREENCOVER
                                 ZStack {
                                     Button {
-                                        gameIsNormalModeShowing.toggle()
-                                        gameState.gameStarted = false
+                                        gameState.gameIsNormalModeShowing.toggle()
+                                        gameState.gameReset()
                                     } label: {
                                         Image(systemName: "xmark.circle.fill")
                                             .font(.system(size: 32))
-//                                            .foregroundColor(.gray)
+                                        //                                            .foregroundColor(.gray)
                                     }
                                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                     .padding(40)
                                     .buttonStyle(.borderless)
-                                    .disabled(false)
+                                    .disabled(gameState.cancelGameDisable)
                                     
-                                    GameNormalModeView()
+                                    GamePlayView()
                                 }
                             }
                             //NORMAL
@@ -85,7 +87,8 @@ struct GameView: View {
                             
                             //HARD
                             Button {
-                                
+                                gameState.gameIsHardModeShowing.toggle()
+                                gameState.gameMode = 2
                             } label: {
                                 Text("Hard")
                                     .font(.title)
@@ -93,6 +96,25 @@ struct GameView: View {
                             }
                             .disabled(true)
                             .buttonStyle(.borderedProminent)
+                            .fullScreenCover(isPresented: $gameState.gameIsHardModeShowing) {
+                                //CLOSE IN-GAME FULLSCREENCOVER
+                                ZStack {
+                                    Button {
+                                        gameState.gameIsHardModeShowing.toggle()
+                                        gameState.gameReset()
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .font(.system(size: 32))
+                                        //                                            .foregroundColor(.gray)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                    .padding(40)
+                                    .buttonStyle(.borderless)
+                                    .disabled(gameState.cancelGameDisable)
+                                    
+                                    GamePlayView()
+                                }
+                            }
                             //HARD
                             
                             
@@ -113,7 +135,7 @@ struct GameView: View {
                     }
                     //CLOSE MODESELECT SHEET
                     Button {
-                        isModeSelectShowingSheet.toggle()
+                        gameState.isModeSelectShowingSheet.toggle()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 32))
@@ -125,6 +147,22 @@ struct GameView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 
+            }
+            .fullScreenCover(isPresented: $gameState.isEndGameViewShowingSheet) {
+                ZStack {
+                    Button {
+                        gameState.isEndGameViewShowingSheet.toggle()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 32))
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .padding(40)
+                    .buttonStyle(.borderless)
+                    Text("END VIEW")
+                        .font(.system(size: 72, weight: .semibold, design: .rounded))
+                }
             }
             
             Spacer()
@@ -157,7 +195,6 @@ struct GameView: View {
             .frame(width: 300, alignment: .center)
             Spacer()
         }
-        .environmentObject(GameState())
         .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: .infinity, alignment: .center)
     }
 }
