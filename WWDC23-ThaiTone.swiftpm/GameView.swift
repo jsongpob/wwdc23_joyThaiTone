@@ -65,18 +65,20 @@ struct GameView: View {
                             .fullScreenCover(isPresented: $gameState.gameIsNormalModeShowing) {
                                 //CLOSE IN-GAME FULLSCREENCOVER
                                 ZStack {
-                                    Button {
-                                        gameState.gameIsNormalModeShowing.toggle()
-                                        gameState.gameReset()
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .font(.system(size: 32))
-                                        //                                            .foregroundColor(.gray)
-                                    }
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                    .padding(40)
-                                    .buttonStyle(.borderless)
-                                    .disabled(gameState.cancelGameDisable)
+                                    if (gameState.gameStarted == false) {
+                                        Button {
+                                            gameState.gameIsNormalModeShowing.toggle()
+                                            gameState.gameReset()
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .font(.system(size: 32))
+                                                .foregroundColor(.gray)
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                                        .padding(40)
+                                        .buttonStyle(.borderless)
+                                        .disabled(gameState.cancelGameDisable)
+                                    } else {}
                                     
                                     GamePlayView()
                                 }
@@ -99,18 +101,20 @@ struct GameView: View {
                             .fullScreenCover(isPresented: $gameState.gameIsHardModeShowing) {
                                 //CLOSE IN-GAME FULLSCREENCOVER
                                 ZStack {
-                                    Button {
-                                        gameState.gameIsHardModeShowing.toggle()
-                                        gameState.gameReset()
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .font(.system(size: 32))
-                                        //                                            .foregroundColor(.gray)
-                                    }
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                    .padding(40)
-                                    .buttonStyle(.borderless)
-                                    .disabled(gameState.cancelGameDisable)
+                                    if (gameState.gameStarted == false) {
+                                        Button {
+                                            gameState.gameIsNormalModeShowing.toggle()
+                                            gameState.gameReset()
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .font(.system(size: 32))
+                                                .foregroundColor(.gray)
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                                        .padding(40)
+                                        .buttonStyle(.borderless)
+                                        .disabled(gameState.cancelGameDisable)
+                                    } else {}
                                     
                                     GamePlayView()
                                 }
@@ -148,22 +152,38 @@ struct GameView: View {
                 
                 
             }
-            .fullScreenCover(isPresented: $gameState.isEndGameViewShowingSheet) {
+            .sheet(isPresented: $gameState.isEndGameViewShowingSheet) {
                 ZStack {
                     Button {
+                        if (gameState.gameFail == true) {
+                            gameState.gameFail = false
+                        }
                         gameState.isEndGameViewShowingSheet.toggle()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 32))
                             .foregroundColor(.gray)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     .padding(40)
                     .buttonStyle(.borderless)
-                    Text("END VIEW")
-                        .font(.system(size: 72, weight: .semibold, design: .rounded))
+                    
+                    if (gameState.gameTimerCountDown <= 0 && gameState.currentRounds > 0 && gameState.gameFail != true) {
+                        GameEndView()
+                    } else if (gameState.gameTimerCountDown >= 0 && gameState.gameFail == true) {
+                        VStack {
+                            Text("YOU FAIL")
+                                .font(.system(size: 72, weight: .semibold, design: .rounded))
+                                .foregroundColor(.red)
+                            Text("Fail of out!")
+                                .font(.system(size: 28, weight: .semibold, design: .rounded))
+                        }
+                    } else if (gameState.gameTimerCountDown <= 0 && gameState.currentRounds == 0) {
+                        GameFailView()
+                    }
                 }
             }
+            //END VIEW
             
             Spacer()
             

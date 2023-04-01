@@ -68,9 +68,7 @@ struct ThaiToneCardView: View {
             //                GridItem(.flexible())
             //            ]
             
-            let adaptiveColumns = [
-                GridItem(.adaptive(minimum: 220, maximum: 260), spacing: 100, alignment: .center)
-            ]
+            let adaptiveColumns = [GridItem(.adaptive(minimum: 220, maximum: 260), spacing: 100, alignment: .center)]
             //            let fixedColumns = [
             //                GridItem(.fixed(330)),
             //                GridItem(.fixed(330)),
