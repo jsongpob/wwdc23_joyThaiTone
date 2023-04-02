@@ -18,7 +18,8 @@ class GameState: ObservableObject {
     //COUNTDOWN
     @Published var countDownTimer = 8 {
         didSet {
-            if (countDownTimer == -1) {
+            if (countDownTimer == -1)
+            {
                 gameStarted = true
             }
         }
@@ -28,9 +29,12 @@ class GameState: ObservableObject {
     //FUNCTION COUNTDOWN
     func startCountDown() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if (self.countDownTimer >= 0) {
+            if (self.countDownTimer >= 0)
+            {
                 self.countDownTimer -= 1
-            } else {
+            }
+            else
+            {
                 timer.invalidate()
             }
         }
@@ -46,6 +50,7 @@ class GameState: ObservableObject {
         Endgame = false
         currentFail = 0
     }
+    
     @Published var cancelGameDisable = false
     func cancelGame() {
         cancelGameDisable = false
@@ -58,12 +63,13 @@ class GameState: ObservableObject {
     //GAME-STARTING SETUP
     
     //NORMAL MODE
-    @Published var Rounds = 5
+    @Published var Rounds = 0
     @Published var currentRounds = 0
     @Published var currentFail = 0 {
         didSet {
             print("currentFail = \(currentFail)")
-            if (currentFail >= 6) {
+            if (currentFail >= 6)
+            {
                 gameFail = true
                 gameTimerCountDown = 0
                 currentFail = 0
@@ -81,7 +87,8 @@ class GameState: ObservableObject {
     @Published var gameTimerCountDown: Float = 30.0 {
         didSet {
             print("gameTimerCountDown = \(gameTimerCountDown)/\(gameTotalTimerCountDown)")
-            if (gameTimerCountDown == 0) {
+            if (gameTimerCountDown == 0)
+            {
                 Endgame = true
                 cancelGameDisable = false
                 isEndGameViewShowingSheet = true
@@ -95,9 +102,12 @@ class GameState: ObservableObject {
     
     func gameTimer() {
         gametimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { gametimer in
-            if (self.gameTimerCountDown > 0) {
+            if (self.gameTimerCountDown > 0)
+            {
                 self.gameTimerCountDown -= 1
-            } else {
+            }
+            else
+            {
                 gametimer.invalidate()
             }
         }
@@ -282,9 +292,12 @@ class GameState: ObservableObject {
         ("Mok", "#dbccb9")]
     
     func getColorName(for hexCode: String) -> String {
-        if let color = colors.first(where: { $0.hex == hexCode }) {
+        if let color = colors.first(where: { $0.hex == hexCode })
+        {
             return color.name
-        } else {
+        }
+        else
+        {
             return ""
         }
     }
@@ -292,6 +305,7 @@ class GameState: ObservableObject {
     @Published var ProgressColor = Color.clear
     @Published var randomColor = Color.clear
     @Published var hexCode = ""
+    @Published var backgroundColors = Color.clear
     
     func randomColors() {
         let randomIndex = Int.random(in: 0..<colors.count)

@@ -15,7 +15,7 @@ struct WhatThaiToneScene: View {
     @State var isShowingSheetC = UserDefaults.standard.bool(forKey: "isShowingSheetC")
     @State var isShowingSheetD = UserDefaults.standard.bool(forKey: "isShowingSheetD")
     
-//    @StateObject var wttsstate = wttsState()
+    //    @StateObject var wttsstate = wttsState()
     @StateObject var appstatedata = GameLevelData()
     
     @State var titleWcardList = ["Inspiration of \nThai-tone colors", "Originator of modern Thai colors", "Origins of ThaiTone colors", ""]
@@ -38,15 +38,15 @@ struct WhatThaiToneScene: View {
             //            .offset(x: 0.0,y: -120.0)
             
             VStack(spacing: 20) {
-//                Text("wttsUnlockLevel:\(gameLevelData.wttsUnlockLevel) wttsTest:\(gameLevelData.wttsUnlockLevelState) wttsprogress:\(gameLevelData.wttsProgress)")
+                //                Text("wttsUnlockLevel:\(gameLevelData.wttsUnlockLevel) wttsTest:\(gameLevelData.wttsUnlockLevelState) wttsprogress:\(gameLevelData.wttsProgress)")
                 //LINE-1
                 HStack(spacing: 20) {
                     
                     //PAGE-1
                     Button(action:
-                    {
+                            {
                         isShowingSheetA.toggle()
-//                        wttsprogresscompleted1()
+                        //                        wttsprogresscompleted1()
                         gameLevelData.wttsUnlock1()
                     })
                     {
@@ -73,9 +73,9 @@ struct WhatThaiToneScene: View {
                     //END PAGE-1
                     //PAGE-2
                     Button(action:
-                    {
+                            {
                         isShowingSheetB.toggle()
-//                        wttsprogresscompleted2()
+                        //                        wttsprogresscompleted2()
                         gameLevelData.wttsUnlock2()
                     })
                     {
@@ -84,23 +84,35 @@ struct WhatThaiToneScene: View {
                         }
                         .buttonStyle(.borderedProminent)
                     }
-                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
-                        Button(action: { isShowingSheetB.toggle() }) {
-                            Text("Dismiss")
+                    .fullScreenCover(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
+                        ZStack {
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack {
+                                    LearningOriginator()
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            
+                            Button(action: { isShowingSheetB.toggle() }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding(30)
                         }
-                        .buttonStyle(.bordered)
-                    }//END PAGE-2
-                    
-                }
+                    }
+                }//END PAGE-2
+                
                 
                 //LINE-2
                 HStack(spacing: 20) {
                     
                     //PAGE-3
                     Button(action:
-                    {
-                        isShowingSheetB.toggle()
-//                        wttsprogresscompleted3()
+                            {
+                        isShowingSheetC.toggle()
+                        //                        wttsprogresscompleted3()
                         gameLevelData.wttsUnlock3()
                     })
                     {
@@ -109,36 +121,48 @@ struct WhatThaiToneScene: View {
                         }
                         .buttonStyle(.borderedProminent)
                     }
-                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
-                        Button(action: { isShowingSheetB.toggle() }) {
-                            Text("Dismiss")
+                    .fullScreenCover(isPresented: $isShowingSheetC, onDismiss: didDismiss) {
+                        ZStack {
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack {
+                                    LearningOrigins()
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            
+                            Button(action: { isShowingSheetC.toggle() }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding(30)
                         }
-                        .buttonStyle(.bordered)
                     }//END PAGE-3
                     
-//                    //PAGE-3
-//                    Button(action:
-//                    {
-//                        isShowingSheetB.toggle()
-////                        wttsprogresscompleted4()
-//                        gameLevelData.wttsUnlock4()
-//                    })
-//                    {
-//                        VStack {
-//                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
-//                        }
-//                        .buttonStyle(.borderedProminent)
-//                    }
-//                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
-//                        Button(action: { isShowingSheetB.toggle() }) {
-//                            Text("Dismiss")
-//                        }
-//                        .buttonStyle(.bordered)
-//                    }//END PAGE-3
+                    //                    //PAGE-3
+                    //                    Button(action:
+                    //                    {
+                    //                        isShowingSheetB.toggle()
+                    ////                        wttsprogresscompleted4()
+                    //                        gameLevelData.wttsUnlock4()
+                    //                    })
+                    //                    {
+                    //                        VStack {
+                    //                            WideCardView(titleWcard: titleWcardList[3], iconWcard: "", Wcardimage: "Art-4", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
+                    //                        }
+                    //                        .buttonStyle(.borderedProminent)
+                    //                    }
+                    //                    .sheet(isPresented: $isShowingSheetB, onDismiss: didDismiss) {
+                    //                        Button(action: { isShowingSheetB.toggle() }) {
+                    //                            Text("Dismiss")
+                    //                        }
+                    //                        .buttonStyle(.bordered)
+                    //                    }//END PAGE-3
                 }
             }
             .padding(40)
-//            .border(.red)
+            //            .border(.red)
         }
         
     }
@@ -157,11 +181,11 @@ struct WhatThaiToneScene: View {
             gameLevelData.wttsProgress += 1
         }
     }
-//    func wttsprogresscompleted4() {
-//        if (gameLevelData.wttsCard4 == false) {
-//            gameLevelData.wttsProgress += 1
-//        }
-//    }
+    //    func wttsprogresscompleted4() {
+    //        if (gameLevelData.wttsCard4 == false) {
+    //            gameLevelData.wttsProgress += 1
+    //        }
+    //    }
 }
 
 

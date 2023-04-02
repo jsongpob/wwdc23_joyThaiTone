@@ -82,7 +82,7 @@ struct ThaiToneCardView: View {
                 if (gameLevelData.GameLevel >= 1) {
                     //CARD LEARN
                     Button(action: { ThaiToneView.toggle() }) {
-                        CardView(titlecard: "What's ThaiTone", subtitlecard: "Learn", iconcard: "play.fill", cardimage: "Art-1", shadowcard: 30)
+                        CardView(titlecard: "What's ThaiTone", subtitlecard: "Learn", iconcard: "", cardimage: "Art-1", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ThaiToneView, onDismiss: didDismiss) {
                         HStack {
@@ -125,7 +125,7 @@ struct ThaiToneCardView: View {
                     
                     //CARD TAKE A LOOK
                     Button(action: { ColorBookView.toggle() }) {
-                        CardView(titlecard: "ThaiTone Color Book", subtitlecard: "Take a look", iconcard: "play.fill", cardimage: "Art-2", shadowcard: 30)
+                        CardView(titlecard: "ThaiTone Color Book", subtitlecard: "Take a look", iconcard: "", cardimage: "Art-2", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ColorBookView, onDismiss: didDismiss) {
                         ScrollView {
@@ -182,7 +182,7 @@ struct ThaiToneCardView: View {
                     
                     //CARD PLAY
                     Button(action: { FindGameView.toggle() }) {
-                        CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "play.fill", cardimage: "Art-3", shadowcard: 30)
+                        CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "", cardimage: "Art-3", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $FindGameView, onDismiss: didDismiss) {
                         ZStack {
