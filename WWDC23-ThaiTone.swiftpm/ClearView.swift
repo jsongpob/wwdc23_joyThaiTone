@@ -60,6 +60,7 @@ struct ClearView_Previews: PreviewProvider {
     static var previews: some View {
         ClearView()
             .environmentObject(GameLevelData())
+            .environmentObject(GameState())
             .previewInterfaceOrientation(.landscapeRight)
     }
 }

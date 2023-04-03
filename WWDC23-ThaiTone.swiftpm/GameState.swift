@@ -70,9 +70,9 @@ class GameState: ObservableObject {
             print("currentFail = \(currentFail)")
             if (currentFail >= 6)
             {
+                currentFail = 0
                 gameFail = true
                 gameTimerCountDown = 0
-                currentFail = 0
             }
         }
     }
@@ -87,7 +87,16 @@ class GameState: ObservableObject {
     @Published var gameTimerCountDown: Float = 30.0 {
         didSet {
             print("gameTimerCountDown = \(gameTimerCountDown)/\(gameTotalTimerCountDown)")
-            if (gameTimerCountDown == 0)
+            if (gameTimerCountDown == -1)
+            {
+                Endgame = true
+                cancelGameDisable = false
+                isEndGameViewShowingSheet = true
+                gameIsNormalModeShowing = false
+                isModeSelectShowingSheet = false
+                gameReset()
+            }
+            else if (gameTimerCountDown == 0)
             {
                 Endgame = true
                 cancelGameDisable = false
@@ -306,11 +315,13 @@ class GameState: ObservableObject {
     @Published var randomColor = Color.clear
     @Published var hexCode = ""
     @Published var backgroundColors = Color.clear
+    @Published var selectedColorsCollection = [(name: String, hex: String)]()
     
     func randomColors() {
-        let randomIndex = Int.random(in: 0..<colors.count)
-        randomColor = Color(hex: colors[randomIndex].hex)
-        hexCode = colors[randomIndex].hex
+        selectedColorsCollection = Array(colors.shuffled()[..<30])
+        let randomIndex = Int.random(in: 0..<selectedColorsCollection.count)
+        randomColor = Color(hex: selectedColorsCollection[randomIndex].hex)
+        hexCode = selectedColorsCollection[randomIndex].hex
     }
     
 }

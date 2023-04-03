@@ -279,6 +279,7 @@ struct Hexagon: Shape {
 //COLORS
 extension Color {
     static let lightgray = Color("lightgray")
+    static let lightgray2 = Color("lightgray2")
 }
 
 

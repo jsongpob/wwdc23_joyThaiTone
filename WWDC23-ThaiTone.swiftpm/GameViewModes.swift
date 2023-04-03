@@ -63,8 +63,8 @@ struct GamePlayView: View {
                     .onAppear
                 {
                     gameState.gameTimer()
-                    gameState.gameTotalTimerCountDown = 30.0
-                    gameState.gameTimerCountDown = 30.0
+                    gameState.gameTotalTimerCountDown = 6.0
+                    gameState.gameTimerCountDown = 6.0
                 }
             }
             else if (gameState.gameStarted == true && gameState.gameMode == 2)
@@ -80,6 +80,7 @@ struct GamePlayView: View {
                 CountDownView()
             }
         }
+
     }
 }
 
@@ -94,7 +95,7 @@ struct GameNormalModeView: View {
     let adaptiveColumns = [GridItem(.adaptive(minimum: 550, maximum: .infinity), alignment: .center)]
     
     var body: some View {
-        LazyHStack(spacing: 50) {
+        HStack(spacing: 30) {
             Spacer()
             //LEFT VIEW
             VStack(alignment: .center, spacing: 20) {
@@ -141,14 +142,16 @@ struct GameNormalModeView: View {
                 .progressViewStyle(LinearProgressViewStyle(tint: gameState.randomColor))
                 Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: 400, maxHeight: .infinity)
 //            .border(.red)
             Collections()
-            Spacer()
+//            Spacer()
         }
+//        .border(.red)
         .background(gameState.backgroundColors)
 //        .animation(.linear(duration: 0.1), value: gameState.backgroundColors)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -234,67 +237,74 @@ extension Color {
 struct Collections: View {
     @EnvironmentObject var gameState: GameState
     
-
+//    static let size: CGFloat = 130
+//    static let spacingBetweenColumns: CGFloat = 8
+//    static let spacingBetweenRows: CGFloat = 8
+//    static let totalColumns: Int = 5
     
-    static let size: CGFloat = 130
-    static let spacingBetweenColumns: CGFloat = 8
-    static let spacingBetweenRows: CGFloat = 8
-    static let totalColumns: Int = 5
-    
-    let gridItems = Array(repeating: GridItem(.fixed(size), spacing: spacingBetweenColumns, alignment: .center), count: totalColumns)
+//    let gridItems = Array(repeating: GridItem(.fixed(size), spacing: spacingBetweenColumns, alignment: .center), count: totalColumns)
     
     var body: some View {
-        ScrollView([.horizontal, .vertical], showsIndicators: false) {
-            LazyVGrid(columns: gridItems, alignment: .center, spacing: Self.spacingBetweenRows) {
+//        ScrollView([.vertical], showsIndicators: false) {
+        VStack {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 8) {
+//            VStack {
 //            LazyVGrid(columns: gridItems, alignment: .center, spacing: 10) {
-                ForEach(gameState.colors, id: \.name) { collection in
-                    Rectangle()
-                        .foregroundColor(Color(hex: collection.hex))
-                        .cornerRadius(15)
-                        .frame(height: Self.size)
-                        .overlay {
-                            VStack {
-                                Text(collection.name)
-                                //                                    Text(collection.hex)
+                ForEach(gameState.selectedColorsCollection, id: \.name) { value in
+                    VStack {
+                        Rectangle()
+                            .onAppear{
+                                print("\(value)")
                             }
-//                            .padding(10)
-                            .font(.system(size: collection.name.count > 18 ? 10 : collection.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
-                            .foregroundColor(.white)
-                        }
-                        .onTapGesture {
-                            if (collection.name == gameState.getColorName(for: gameState.hexCode))
-                            {
-                                print(gameState.getColorName(for: gameState.hexCode))
-                                print("\(collection.name)")
-                                print("+1")
-                                gameState.randomColors()
-                                gameState.currentRounds += 1
-                                gameState.gameTimerCountDown += 3
-                                gameState.backgroundColors = Color(hex: collection.hex)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                    withAnimation {
-                                        self.gameState.backgroundColors = Color.white
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (gameState.gameTimerCountDown >= 1)
+                            .frame(minWidth: 100, idealWidth: 150, maxWidth: .infinity, minHeight: 100, idealHeight: 120, maxHeight: .infinity)
+                            .foregroundColor(Color(hex: value.hex))
+                            .cornerRadius(15)
+    //                        .frame(height: Self.size)
+                            .overlay {
+                                VStack
                                 {
-                                    gameState.gameTimerCountDown -= 2
-                                    gameState.currentFail += 1
-                                    gameState.backgroundColors = Color.black
+                                    Text(value.name)
+                                }
+                                .font(.system(size: value.name.count > 18 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
+                                .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                if (value.name == gameState.getColorName(for: gameState.hexCode))
+                                {
+    //                                print(gameState.getColorName(for: gameState.hexCode))
+    //                                print("\(collection.name)")
+    //                                print("+1")
+                                    gameState.randomColors()
+                                    gameState.currentRounds += 1
+                                    gameState.gameTimerCountDown += 1
+                                    gameState.backgroundColors = Color(hex: value.hex)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                                         withAnimation {
                                             self.gameState.backgroundColors = Color.white
                                         }
                                     }
                                 }
-                            }
+                                else
+                                {
+                                    if (gameState.gameTimerCountDown >= 0)
+                                    {
+                                        gameState.currentFail += 1
+                                        gameState.gameTimerCountDown -= 2
+                                        gameState.backgroundColors = Color.lightgray2
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                            withAnimation {
+                                                self.gameState.backgroundColors = Color.white
+                                            }
+                                        }
+                                    }
+                                }
                         }
+                    }
                 }
             }
+            .padding(30)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 //        .border(.red)
     }
 }

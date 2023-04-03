@@ -204,6 +204,9 @@ struct TTColorBookView: View {
                                 selectedColor = color
                                 gameLevelData.colorBookSelect += 1
                             }
+                            .onAppear{
+                                print("\(color)")
+                            }
                         //                            .shadow(radius: 10)
                         //                            .overlay{
                         VStack {
