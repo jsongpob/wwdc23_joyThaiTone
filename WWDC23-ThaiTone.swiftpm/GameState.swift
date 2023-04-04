@@ -15,6 +15,43 @@ class GameState: ObservableObject {
     @Published var isModeSelectShowingSheet = false
     @Published var isEndGameViewShowingSheet = false
     
+    //INGAMES
+    func NormalModeStart() {
+        gameTimer()
+        gameTotalTimerCountDown = 8.0
+        gameTimerCountDown = 8.0
+    }
+    func inGameNormalMode() {
+        //print(gameState.getColorName(for: gameState.hexCode))
+        //print("\(collection.name)")
+        //print("+1")
+        getNewColorsRounds()
+        randomColors()
+        currentRounds += 1
+        if (gameTimerCountDown < gameTotalTimerCountDown-2) {
+            gameTimerCountDown += 2
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            withAnimation {
+                self.backgroundColors = Color.white
+            }
+        }
+    }
+    func inGameNormalModeFail() {
+        if (gameTimerCountDown >= 0)
+        {
+            currentFail += 1
+            gameTimerCountDown -= 2
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation {
+                    self.backgroundColors = Color.white
+                }
+            }
+        }
+    }
+    
+    
+    
     //COUNTDOWN
     @Published var countDownTimer = 8 {
         didSet {
@@ -95,6 +132,7 @@ class GameState: ObservableObject {
                 gameIsNormalModeShowing = false
                 isModeSelectShowingSheet = false
                 gameReset()
+                gameTimerCountDown = 0
             }
             else if (gameTimerCountDown == 0)
             {
@@ -258,7 +296,7 @@ class GameState: ObservableObject {
         ("Thongdangsuk", "#d68f71"),
         ("Nak", "#cb7371"),
         ("Lueamphai", "#e3c0ab"),
-        ("lueamlueang", "#e7d992"),
+        ("Lueamlueang", "#e7d992"),
         ("Ngen", "#bcc4c1"),
         ("Kaoponpet", "#e5dbc0"),
         ("Lek", "#bcbdb8"),
@@ -301,7 +339,7 @@ class GameState: ObservableObject {
         ("Mok", "#dbccb9")]
     
     func getColorName(for hexCode: String) -> String {
-        if let color = colors.first(where: { $0.hex == hexCode })
+        if let color = selectedColorsCollection.first(where: { $0.hex == hexCode })
         {
             return color.name
         }
@@ -318,10 +356,56 @@ class GameState: ObservableObject {
     @Published var selectedColorsCollection = [(name: String, hex: String)]()
     
     func randomColors() {
-        selectedColorsCollection = Array(colors.shuffled()[..<30])
-        let randomIndex = Int.random(in: 0..<selectedColorsCollection.count)
+        selectedColorsCollection = self.selectedColorsCollection.shuffled()
+        let randomIndex = Int.random(in: 0..<selectedColorsCollection.capacity)
         randomColor = Color(hex: selectedColorsCollection[randomIndex].hex)
         hexCode = selectedColorsCollection[randomIndex].hex
     }
+    
+    func getColors() {
+        selectedColorsCollection = Array(colors.shuffled()[..<30]).sorted(by: { $0.hex < $1.hex })
+    }
+    
+    func getNewColorsRounds() {
+        if (currentRounds == 10) {
+            getColors()
+        }
+        else if (currentRounds == 20)
+        {
+            getColors()
+        }
+        else if (currentRounds == 30)
+        {
+            getColors()
+        }
+        else if (currentRounds == 40)
+        {
+            getColors()
+        }
+        else if (currentRounds == 50)
+        {
+            getColors()
+        }
+        else if (currentRounds == 60)
+        {
+            getColors()
+        }
+        else if (currentRounds == 70)
+        {
+            getColors()
+        }
+        else if (currentRounds == 80)
+        {
+            getColors()
+        }
+        else if (currentRounds == 90)
+        {
+            getColors()
+        }
+    }
+    
+    //ORIRENTATION CHECK
+    @State var orientation = UIDeviceOrientation.unknown
+
     
 }

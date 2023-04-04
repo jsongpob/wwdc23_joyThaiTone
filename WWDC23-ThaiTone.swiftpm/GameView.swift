@@ -54,6 +54,7 @@ struct GameView: View {
                             {
                                 gameState.gameIsNormalModeShowing.toggle()
                                 gameState.gameMode = 1
+                                gameState.getColors()
                             } label:
                             {
                                 Text("Normal")
@@ -200,7 +201,8 @@ struct GameView: View {
                     }
                     else
                     {
-                        Text("ERROR VIEW")
+                        Text("ERROR")
+                            .font(.system(size: 32, weight: .semibold, design: .rounded))
                     }
                     //ENDVIEW SHOW CONDITION
                     

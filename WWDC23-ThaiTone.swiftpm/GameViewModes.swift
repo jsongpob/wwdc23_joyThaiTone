@@ -62,9 +62,7 @@ struct GamePlayView: View {
                 GameNormalModeView()
                     .onAppear
                 {
-                    gameState.gameTimer()
-                    gameState.gameTotalTimerCountDown = 6.0
-                    gameState.gameTimerCountDown = 6.0
+                    gameState.NormalModeStart()
                 }
             }
             else if (gameState.gameStarted == true && gameState.gameMode == 2)
@@ -95,7 +93,8 @@ struct GameNormalModeView: View {
     let adaptiveColumns = [GridItem(.adaptive(minimum: 550, maximum: .infinity), alignment: .center)]
     
     var body: some View {
-        HStack(spacing: 30) {
+//        if ()
+        HStack(spacing: 40) {
             Spacer()
             //LEFT VIEW
             VStack(alignment: .center, spacing: 20) {
@@ -140,16 +139,14 @@ struct GameNormalModeView: View {
                 }
                 .padding(.horizontal, 10)
                 .progressViewStyle(LinearProgressViewStyle(tint: gameState.randomColor))
+                .animation(.spring(),value: gameState.currentRounds)
                 Spacer()
             }
             .frame(maxWidth: 400, maxHeight: .infinity)
-//            .border(.red)
             Collections()
-//            Spacer()
+            Spacer()
         }
-//        .border(.red)
         .background(gameState.backgroundColors)
-//        .animation(.linear(duration: 0.1), value: gameState.backgroundColors)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
     }
@@ -165,17 +162,6 @@ struct GameHardModeView: View {
         }
     }
 }
-
-
-//PREVIEWS
-struct GameViewModes_Previews: PreviewProvider {
-    static var previews: some View {
-        GameNormalModeView()
-            .environmentObject(GameState())
-            .previewInterfaceOrientation(.landscapeRight)
-    }
-}
-
 
 //ENDVIEW
 struct GameEndView: View {
@@ -220,6 +206,69 @@ struct GameReasonFailView: View {
     }
 }
 
+//COLORS COLLECTIONS
+struct Collections: View {
+    @EnvironmentObject var gameState: GameState
+    let adaptive = [GridItem(.adaptive(minimum: 100, maximum: 280))]
+    
+    var body: some View {
+        VStack {
+//            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 8) {
+            LazyVGrid(columns: adaptive, spacing: 10) {
+                ForEach(gameState.selectedColorsCollection, id: \.name) { value in
+                    VStack {
+                        Rectangle()
+                            .onAppear
+                            {
+                                print("\(value)")
+                            }
+                            .frame(minWidth: 80, idealWidth: 110, maxWidth: .infinity, minHeight: 80, idealHeight: 110, maxHeight: .infinity)
+                            .foregroundColor(Color(hex: value.hex))
+                            .cornerRadius(15)
+                            .overlay
+                                {
+                                VStack
+                                {
+                                    Text(value.name)
+                                }
+                                .font(.system(size: value.name.count > 14 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
+                                .foregroundColor(.white)
+                            }
+                            .onTapGesture
+                                {
+                                if (value.name == gameState.getColorName(for: gameState.hexCode))
+                                {
+                                    gameState.inGameNormalMode()
+                                    gameState.backgroundColors = Color(hex: value.hex)
+                                }
+                                else
+                                {
+                                    gameState.inGameNormalModeFail()
+                                    gameState.backgroundColors = Color.lightgray2
+                                }
+                        }
+                    }
+                }
+            }
+            .animation(.spring(),value: gameState.currentRounds)
+            .padding(15)
+        }
+        .background(.white)
+        .cornerRadius(30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    }
+}
+
+//PREVIEWS
+struct GameViewModes_Previews: PreviewProvider {
+    static var previews: some View {
+        GamePlayView()
+            .environmentObject(GameState())
+            .previewInterfaceOrientation(.landscapeRight)
+    }
+}
+
+//COLOR CONVERTER
 extension Color {
     init(hexString: String) {
         let scanner = Scanner(string: hexString)
@@ -231,80 +280,5 @@ extension Color {
         let b = Double(rgbValue & 0xff) / 255.0
         
         self.init(red: r, green: g, blue: b)
-    }
-}
-
-struct Collections: View {
-    @EnvironmentObject var gameState: GameState
-    
-//    static let size: CGFloat = 130
-//    static let spacingBetweenColumns: CGFloat = 8
-//    static let spacingBetweenRows: CGFloat = 8
-//    static let totalColumns: Int = 5
-    
-//    let gridItems = Array(repeating: GridItem(.fixed(size), spacing: spacingBetweenColumns, alignment: .center), count: totalColumns)
-    
-    var body: some View {
-//        ScrollView([.vertical], showsIndicators: false) {
-        VStack {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 8) {
-//            VStack {
-//            LazyVGrid(columns: gridItems, alignment: .center, spacing: 10) {
-                ForEach(gameState.selectedColorsCollection, id: \.name) { value in
-                    VStack {
-                        Rectangle()
-                            .onAppear{
-                                print("\(value)")
-                            }
-                            .frame(minWidth: 100, idealWidth: 150, maxWidth: .infinity, minHeight: 100, idealHeight: 120, maxHeight: .infinity)
-                            .foregroundColor(Color(hex: value.hex))
-                            .cornerRadius(15)
-    //                        .frame(height: Self.size)
-                            .overlay {
-                                VStack
-                                {
-                                    Text(value.name)
-                                }
-                                .font(.system(size: value.name.count > 18 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
-                                .foregroundColor(.white)
-                            }
-                            .onTapGesture {
-                                if (value.name == gameState.getColorName(for: gameState.hexCode))
-                                {
-    //                                print(gameState.getColorName(for: gameState.hexCode))
-    //                                print("\(collection.name)")
-    //                                print("+1")
-                                    gameState.randomColors()
-                                    gameState.currentRounds += 1
-                                    gameState.gameTimerCountDown += 1
-                                    gameState.backgroundColors = Color(hex: value.hex)
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                        withAnimation {
-                                            self.gameState.backgroundColors = Color.white
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (gameState.gameTimerCountDown >= 0)
-                                    {
-                                        gameState.currentFail += 1
-                                        gameState.gameTimerCountDown -= 2
-                                        gameState.backgroundColors = Color.lightgray2
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                            withAnimation {
-                                                self.gameState.backgroundColors = Color.white
-                                            }
-                                        }
-                                    }
-                                }
-                        }
-                    }
-                }
-            }
-            .padding(30)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//        .border(.red)
     }
 }
