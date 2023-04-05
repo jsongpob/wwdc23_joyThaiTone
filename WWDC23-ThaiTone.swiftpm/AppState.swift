@@ -45,6 +45,12 @@ class GameLevelData: ObservableObject {
 //    init() {
 //        FirstWelcomeView = true
 //    }
+    
+//    init() {
+//        if (dataWelcomeView == false) {
+//            FirstWelcomeView = true
+//        }
+//    }
     @Published var GameLevel: Int = UserDefaults.standard.integer(forKey: "GameLevel") {
         didSet {
             UserDefaults.standard.set(GameLevel, forKey: "GameLevel")
@@ -69,14 +75,14 @@ class GameLevelData: ObservableObject {
     
     @Published var FirstWelcomeView: Bool = UserDefaults.standard.bool(forKey: "datawelcomeview") {
         didSet {
-            print("FirstWelcomeView bool changed")
+            print("FirstWelcomeView bool changed = \(FirstWelcomeView)")
             UserDefaults.standard.set(FirstWelcomeView, forKey: "datawelcomeview")
         }
     }
     
     @Published var dataWelcomeView: Bool = true {
         didSet {
-            print("dataWelcomeView data changed")
+            print("dataWelcomeView data changed = \(dataWelcomeView)")
         }
     }
     
@@ -115,6 +121,7 @@ class GameLevelData: ObservableObject {
     }
     
     func gamereset() {
+        print("(!) GAMERESET (!)")
         GameLevel = 0
         GameProgress = 0.0
         wttsProgress = 0

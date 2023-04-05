@@ -52,6 +52,11 @@ struct ClearView: View {
                         Label("About", systemImage: "info.circle.fill")
                     }
             }
+//            .onAppear {
+//                if (gameLevelData.GameLevel < 1) {
+//                    gameLevelData.GameLevel = 1
+//                }
+//            }
         }
     }
 }

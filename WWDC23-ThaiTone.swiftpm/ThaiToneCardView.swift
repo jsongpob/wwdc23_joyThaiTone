@@ -23,6 +23,8 @@ struct ThaiToneCardView: View {
     @State private var FindGameView = false
     @State private var EndGameView = false
     
+    @State var debuging = false
+    
     var body: some View {
         VStack {
             Spacer()
@@ -33,26 +35,29 @@ struct ThaiToneCardView: View {
                     .font(.system(size: 48, weight: .bold))
                 Text("Play and learn to unlock. Have fun!")
                     .font(.title2)
+                    .onTapGesture(count: 3) {
+                        debuging.toggle()
+                    }
                 
                 //DEBUG TEXTVIEW
-                HStack {
-                    //                Text("\(gameLevelData.wttsProgress) :wttsProgress.gameLevelData")
-                    Text("\(gameLevelData.GameLevel) :gameLevel")
-                    //                Text("\(wttsstate.wttscompleted ? "True" : "False") :wttscompleted")
-                    Button(action: {
-                        gameLevelData.unlocklevel()
-                    }) {
-                        Text("Click")
-                    }
-                    Button(action: {
-                        gameLevelData.gamereset()
-                    }) {
-                        Text("Reset")
-                    }
-                    Button(action: {
-                        gameLevelData.FirstWelcomeView = true
-                    }) {
-                        Text("showWelcomeView")
+                if (debuging == true) {
+                    HStack {
+                        Text("\(gameLevelData.GameLevel) :gameLevel")
+                        Button(action: {
+                            gameLevelData.unlocklevel()
+                        }) {
+                            Text("Click")
+                        }
+                        Button(action: {
+                            gameLevelData.gamereset()
+                        }) {
+                            Text("Reset")
+                        }
+                        Button(action: {
+                            gameLevelData.FirstWelcomeView = true
+                        }) {
+                            Text("showWelcomeView")
+                        }
                     }
                 }
                 //DEBUG TEXTVIEW
@@ -119,6 +124,9 @@ struct ThaiToneCardView: View {
                     }
                 } else {
                     DisableCardView(titlecard: "???", subtitlecard: "learn", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
+                        .onAppear {
+                            gameLevelData.FirstWelcomeView = true
+                        }
                 }
                 
                 
@@ -285,7 +293,7 @@ struct ThaiToneCardView: View {
             //            }
             //            .padding([.leading,.trailing], 430)
             //            .progressViewStyle(.automatic)
-            Spacer()
+//            Spacer()
         }
     }
 }

@@ -192,7 +192,7 @@ struct GameView: View {
                     {
                         GameEndView()
                             .onAppear {
-                                Sounds.play(sound: "mixkit-completion-of-a-levelmp3", type: "mp3")
+                                Sounds.play(sound: "mixkit-completion-of-a-level", type: "mp3")
                                 if (gameLevelData.EndOneTime == false) {
                                     gameLevelData.EndOneTime = true
                                 }
@@ -234,22 +234,76 @@ struct GameView: View {
                     isHowtoShowingSheet.toggle()
                 } label: {
                     Text("How to play")
+//                        .font(.system(size: 18, weight: .semibold, design: .rounded))
                 }
                 .sheet(isPresented: $isHowtoShowingSheet, onDismiss: didDismiss) {
-                    Text("How to play")
+                        VStack {
+                            Spacer()
+                            VStack(spacing: 10) {
+                                Image(systemName: "pencil.and.outline")
+                                    .font(.system(size: 64, weight: .bold, design: .rounded))
+                                    .foregroundColor(.blue)
+                                Text("Find ThaiTone")
+                                    .font(.system(size: 36, weight: .medium, design: .rounded))
+                            }
+                            Spacer()
+                            VStack {
+                                HStack(spacing: 30) {
+                                    Image(systemName: "dice.fill")
+                                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                                        .foregroundColor(.black)
+                                    Text("This game will feature a random color that the player must select at the start of the game.")
+                                        .frame(maxWidth: 450, maxHeight: 100, alignment: .leading)
+                                }
+                                HStack(spacing: 30) {
+                                    Image(systemName: "paintbrush.fill")
+                                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                                        .foregroundColor(.black)
+                                    Text("The player's choice of color must match the color chosen at random. If a player makes more than 5 incorrect the game is over.")
+                                        .frame(maxWidth: 450, maxHeight: 100, alignment: .leading)
+                                }
+                                HStack(spacing: 30) {
+                                    Image(systemName: "timer")
+                                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                                        .foregroundColor(.black)
+                                    Text("Players have a certain amount of time to play. to be win in the game")
+                                        .frame(maxWidth: 450, maxHeight: 100, alignment: .leading)
+                                }
+                                HStack(spacing: 30) {
+                                    Image(systemName: "flag.2.crossed.circle.fill")
+                                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                                        .foregroundColor(.black)
+                                    Text("Enjoy playing games with your friends. have fun!")
+                                        .frame(maxWidth: 450, maxHeight: 100, alignment: .leading)
+                                }
+                            }
+//                            .padding(.bottom, 20)
+//                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                            .multilineTextAlignment(.leading)
+                            Spacer()
+                            Button {
+                                isHowtoShowingSheet.toggle()
+                            } label: {
+                                Text("Let's go")
+                            }
+                            .buttonStyle(.bordered)
+                            Spacer()
+                        }
+//                        .padding(80)
                 }
                 //HOWTO
-                Spacer()
+//                Spacer()
                 
                 //LEADERBAORD
-                Button {
-                    isLeaderShowingSheet.toggle()
-                } label: {
-                    Text("Leaderboard")
-                }
-                .sheet(isPresented: $isLeaderShowingSheet, onDismiss: didDismiss) {
-                    Text("Leaderboard")
-                }
+//                Button {
+//                    isLeaderShowingSheet.toggle()
+//                } label: {
+//                    Text("Leaderboard")
+//                }
+//                .sheet(isPresented: $isLeaderShowingSheet, onDismiss: didDismiss) {
+//                    Text("Leaderboard")
+//                }
+//                .disabled(true)
                 //LEADERBAORD
             }
             .frame(width: 300, alignment: .center)
