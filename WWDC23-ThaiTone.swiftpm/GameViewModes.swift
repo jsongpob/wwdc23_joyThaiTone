@@ -185,7 +185,7 @@ struct GameFailView: View {
     var body: some View {
         VStack {
             Text("Fail Game View")
-                .font(.largeTitle)
+                .font(.system(size: 72, weight: .semibold, design: .rounded))
                 .foregroundColor(.red)
         }
     }

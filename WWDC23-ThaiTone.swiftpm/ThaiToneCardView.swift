@@ -21,6 +21,7 @@ struct ThaiToneCardView: View {
     @State private var ThaiToneView = false
     @State private var ColorBookView = false
     @State private var FindGameView = false
+    @State private var EndGameView = false
     
     var body: some View {
         VStack {
@@ -198,7 +199,14 @@ struct ThaiToneCardView: View {
 //                                }
 //                                .frame(width: 400, height: 120, alignment: .leading)
 //                                Spacer()
-                                Button(action: { FindGameView.toggle() }) {
+                                Button(action: {
+                                    FindGameView.toggle()
+                                    if (gameLevelData.EndOneTime == true && gameLevelData.endTabUnlock == false) {
+                                        gameLevelData.endTabUnlock = true
+                                        EndGameView = true
+                                        gameLevelData.GameLevel = 4
+                                    }
+                                }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .font(.system(size: 32))
                                         .foregroundColor(.gray)
@@ -216,6 +224,39 @@ struct ThaiToneCardView: View {
                     DisableCardView(titlecard: "???", subtitlecard: "play", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
                     
                 }
+                
+                if (gameLevelData.endTabUnlock == true) {
+                    Button(action: { EndGameView.toggle() }) {
+//                        CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "", cardimage: "Art-3", shadowcard: 30)
+                    }
+                    .fullScreenCover(isPresented: $EndGameView, onDismiss: didDismiss) {
+                        ZStack {
+                            HStack {
+//                                VStack {
+//                                    Text("play")
+//                                        .font(.subheadline)
+//                                        .textCase(.uppercase)
+//                                        .frame(width: 400, alignment: .leading)
+//                                    Text("Find ThaiTone")
+//                                        .font(.system(size: 36, weight: .bold))
+//                                        .frame(width: 400, alignment: .leading)
+//                                }
+//                                .frame(width: 400, height: 120, alignment: .leading)
+//                                Spacer()
+                                Button(action: { EndGameView.toggle() }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .font(.system(size: 32))
+                                        .foregroundColor(.gray)
+                                }
+                                .buttonStyle(.borderless)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding(30)
+//                            Text("TRUE ENDGAME VIEW")
+                            EndView()
+                        }
+                    }
+                }
             }
             .onChange(of: gameLevelData.GameLevel, perform: { newValue in
                 if (gameLevelData.GameLevel >= 1) {
@@ -224,6 +265,16 @@ struct ThaiToneCardView: View {
             })
             .padding([.leading, .trailing], 100)
             //            .padding(.bottom, 50)
+            
+            Button {
+                EndGameView.toggle()
+            } label: {
+//                Text("111")
+            }
+            .fullScreenCover(isPresented: $EndGameView, onDismiss: didDismiss) {
+                Text("TRUE END VIEW")
+            }
+
             
             Spacer()
             

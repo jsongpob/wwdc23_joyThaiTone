@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
+    @EnvironmentObject var gameLevelData: GameLevelData
     
     //SHEET ACTION
     @State private var isHowtoShowingSheet = false
@@ -190,14 +191,26 @@ struct GameView: View {
                     if (gameState.gameTimerCountDown <= 0 && gameState.currentRounds > 0 && gameState.gameFail != true)
                     {
                         GameEndView()
+                            .onAppear {
+                                Sounds.play(sound: "mixkit-completion-of-a-levelmp3", type: "mp3")
+                                if (gameLevelData.EndOneTime == false) {
+                                    gameLevelData.EndOneTime = true
+                                }
+                            }
                     }
                     else if (gameState.gameTimerCountDown >= 0 && gameState.gameFail == true)
                     {
                         GameReasonFailView()
+                            .onAppear {
+                                Sounds.play(sound: "mixkit-player-losing-or-failing", type: "mp3")
+                            }
                     }
                     else if (gameState.gameTimerCountDown <= 0 && gameState.currentRounds == 0)
                     {
                         GameFailView()
+                            .onAppear {
+                                Sounds.play(sound: "mixkit-player-losing-or-failing", type: "mp3")
+                            }
                     }
                     else
                     {

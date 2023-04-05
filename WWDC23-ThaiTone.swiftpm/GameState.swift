@@ -18,19 +18,21 @@ class GameState: ObservableObject {
     //INGAMES
     func NormalModeStart() {
         gameTimer()
-        gameTotalTimerCountDown = 8.0
-        gameTimerCountDown = 8.0
+        gameTotalTimerCountDown = 30.0
+        gameTimerCountDown = 30.0
+        Sounds.playInGame(sound: "mixkit-game-level-music", type: "mp3")
     }
     func inGameNormalMode() {
         //print(gameState.getColorName(for: gameState.hexCode))
         //print("\(collection.name)")
         //print("+1")
+        Sounds.play(sound: "mixkit-game-flute-bonus", type: "mp3")
         getNewColorsRounds()
         randomColors()
         currentRounds += 1
-        if (gameTimerCountDown < gameTotalTimerCountDown-2) {
-            gameTimerCountDown += 2
-        }
+//        if (gameTimerCountDown < gameTotalTimerCountDown-2) {
+//            gameTimerCountDown += 2
+//        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             withAnimation {
                 self.backgroundColors = Color.white
@@ -41,7 +43,8 @@ class GameState: ObservableObject {
         if (gameTimerCountDown >= 0)
         {
             currentFail += 1
-            gameTimerCountDown -= 2
+//            gameTimerCountDown -= 2
+            Sounds.play(sound: "mixkit-video-game-power-up", type: "mp3")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 withAnimation {
                     self.backgroundColors = Color.white
@@ -80,6 +83,9 @@ class GameState: ObservableObject {
     
     //GAME RESET
     func gameReset() {
+        if ((Sounds.audioPlayerInGame) != nil) {
+            Sounds.audioPlayerInGame.stop()
+        }
         countDownTimer = 8
         gameStarted = false
         gameMode = 0
@@ -363,43 +369,59 @@ class GameState: ObservableObject {
     }
     
     func getColors() {
+        NormalCheck()
         selectedColorsCollection = Array(colors.shuffled()[..<30]).sorted(by: { $0.hex < $1.hex })
+    }
+    
+    func NormalCheck() {
+        if (gameMode == 1 && gameTimerCountDown < gameTotalTimerCountDown-2) {
+            gameTimerCountDown += 5
+        }
     }
     
     func getNewColorsRounds() {
         if (currentRounds == 10) {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 20)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 30)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 40)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 50)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 60)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 70)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 80)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
         else if (currentRounds == 90)
         {
+            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
             getColors()
         }
     }

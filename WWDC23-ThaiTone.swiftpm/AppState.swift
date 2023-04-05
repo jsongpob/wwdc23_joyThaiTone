@@ -9,10 +9,19 @@ import Foundation
 import SwiftUI
 
 class GameLevelData: ObservableObject {
-    
-    @Published var endTabUnlock: Bool = false {
+    @Published var endTabUnlock: Bool = UserDefaults.standard.bool(forKey: "endTablUnlock") {
         didSet {
+            if (endTabUnlock == true && GameLevel == 3) {
+                GameLevel += 1
+            }
+            UserDefaults.standard.set(endTabUnlock, forKey: "endTablUnlock")
             print("endTabUnlock data changed")
+        }
+    }
+    
+    @Published var EndOneTime = false {
+        didSet {
+            print("EndOneTime = \(EndOneTime)")
         }
     }
     
@@ -111,9 +120,11 @@ class GameLevelData: ObservableObject {
         wttsProgress = 0
         FirstWelcomeView = true
         wttsResetUnlock()
+        endTabUnlock = false
         wttscompleted = false
         colorBookSelect = 0
         TTcolorcompleted = false
+        EndOneTime = false
     }
     
     //FUNC to check WelcomeView it's show only on first time and store user data
