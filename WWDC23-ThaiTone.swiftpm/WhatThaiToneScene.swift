@@ -50,7 +50,7 @@ struct WhatThaiToneScene: View {
                         gameLevelData.wttsUnlock1()
                     })
                     {
-                        WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "Art-1", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
+                        WideCardView(titleWcard: titleWcardList[0], iconWcard: "", Wcardimage: "whatcard_inspire", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                     }
                     .fullScreenCover(isPresented: $isShowingSheetA, onDismiss: didDismiss) {
                         ZStack {
@@ -80,7 +80,7 @@ struct WhatThaiToneScene: View {
                     })
                     {
                         VStack {
-                            WideCardView(titleWcard: titleWcardList[1], iconWcard: "", Wcardimage: "Art-2", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
+                            WideCardView(titleWcard: titleWcardList[1], iconWcard: "", Wcardimage: "whatcard_origin", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -117,7 +117,7 @@ struct WhatThaiToneScene: View {
                     })
                     {
                         VStack {
-                            WideCardView(titleWcard: titleWcardList[2], iconWcard: "", Wcardimage: "Art-3", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
+                            WideCardView(titleWcard: titleWcardList[2], iconWcard: "", Wcardimage: "whatcard_creator", shadowWcard: 16, MinW: 100, IdW: 100, MaxW: .infinity, MinH: 100, IdH: 100, MaxH: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
                     }
