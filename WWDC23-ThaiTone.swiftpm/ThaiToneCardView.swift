@@ -33,7 +33,7 @@ struct ThaiToneCardView: View {
             VStack {
                 Text("ThaiTone")
                     .font(.system(size: 48, weight: .bold))
-                Text("Play and learn to unlock. Have fun!")
+                Text("Play and learn to unlock new things in ThaiTone. Have fun!")
                     .font(.title2)
                     .onTapGesture(count: 3) {
                         debuging.toggle()
@@ -105,7 +105,7 @@ struct ThaiToneCardView: View {
                             
                             Spacer()
                             
-                            Text("Read the Article")
+                            Text("Read the article")
                                 .font(.system(size: 18))
                                 .foregroundColor(.gray)
                                 .frame(width: 320, alignment: .trailing)
@@ -139,7 +139,7 @@ struct ThaiToneCardView: View {
                     
                     //CARD TAKE A LOOK
                     Button(action: { ColorBookView.toggle() }) {
-                        CardView(titlecard: "ThaiTone Color Book", subtitlecard: "Take a look", iconcard: "", cardimage: "colorsbook_card", shadowcard: 30)
+                        CardView(titlecard: "ThaiTone Collection", subtitlecard: "Take a look", iconcard: "", cardimage: "colorsbook_card", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ColorBookView, onDismiss: didDismiss) {
                         ScrollView {
@@ -149,7 +149,7 @@ struct ThaiToneCardView: View {
                                         .font(.subheadline)
                                         .textCase(.uppercase)
                                         .frame(width: 400, alignment: .leading)
-                                    Text("ThaiTone colors book")
+                                    Text("ThaiTone Collection")
                                         .font(.system(size: 36, weight: .bold))
                                         .frame(width: 400, alignment: .leading)
                                 }
@@ -158,12 +158,12 @@ struct ThaiToneCardView: View {
                                 Spacer()
                                 
                                 if (gameLevelData.colorBookSelect < 5) {
-                                    Text("Select color you like! (\(gameLevelData.colorBookSelect)/5)")
+                                    Text("Select colors you like (\(gameLevelData.colorBookSelect)/5)")
                                         .font(.system(size: 18))
                                         .foregroundColor(.gray)
                                         .frame(width: 320, alignment: .trailing)
                                 } else {
-                                    Text("Select color you like! (5/5) Completed!")
+                                    Text("Select colors you like (5/5) Completed")
                                         .font(.system(size: 18))
                                         .foregroundColor(.gray)
                                         .frame(width: 320, alignment: .trailing)

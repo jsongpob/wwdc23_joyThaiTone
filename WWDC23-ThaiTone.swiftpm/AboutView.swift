@@ -11,19 +11,19 @@ struct AboutView: View {
     var body: some View {
         VStack {
             //TITLE
-            Text("About this project")
+            Text("About this app")
                 .font(.subheadline)
             Text("ThaiTone")
                 .font(.system(size: 89, weight: .medium))
             //CONTENT
             VStack {
-                VStack(spacing: 40) {
-                    CallCardView(callicon: "swift", calltext: "Vestibulum viverra lorem odio. Ut in risus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim nibh tincidunt tortor congue pretium. Sed consectetur risus nec dui ultrices, sit amet maximus lacus lacinia. Aliquam auctor id ex vitae placerat. Nullam elit est, pulvinar sed felis eget, vestibulum suscipit nisi. Phasellus sagittis efficitur metus."
+                VStack(spacing: 20) {
+                    CallCardView(callicon: "swift", calltext: "This app was created for the Apple WWDC23 Swift Student Challenge submission by Songpob Hamthanan, and this is my first time submission!"
                     )
-                    CallCardView(callicon: "flag.fill", calltext: "Vestibulum viverra lorem odio. Ut in risus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim nibh tincidunt tortor congue pretium. Sed consectetur risus nec dui ultrices, sit amet maximus lacus lacinia. Aliquam auctor id ex vitae placerat. Nullam elit est, pulvinar sed felis eget, vestibulum suscipit nisi. Phasellus sagittis efficitur metus."
+                    CallCardView(callicon: "person.fill", calltext: "I'm currently studying in Thailand in relation to user interface and user experience design. Including programming too! I really love learning these things because they can create something new and different. where I can put my own personality into it as well."
                     )
-                    CallCardView(callicon: "person.fill", calltext: "Vestibulum viverra lorem odio. Ut in risus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim nibh tincidunt tortor congue pretium. Sed consectetur risus nec dui ultrices, sit amet maximus lacus lacinia. Aliquam auctor id ex vitae placerat. Nullam elit est, pulvinar sed felis eget, vestibulum suscipit nisi. Phasellus sagittis efficitur metus."
-                    )
+                    Resources()
+
                 }
             }
             .padding(.horizontal, 60)
@@ -34,7 +34,7 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         AboutView()
-//            .previewInterfaceOrientation(.landscapeRight)
+            .previewInterfaceOrientation(.landscapeRight)
     }
 }
 
@@ -47,12 +47,67 @@ struct CallCardView: View {
         HStack {
             Image(systemName: callicon)
                 .foregroundColor(.blue)
-                .frame(width: 100, height: 100, alignment: .center)
+                .frame(width: 100, height: 100)
                 .font(.system(size: 48))
+                .padding(.trailing, 20)
             Text(calltext)
                 .font(.body)
                 .multilineTextAlignment(.leading)
-//                .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, minHeight: 100, idealHeight: 100, maxHeight: .infinity, alignment: .leading)
         }
+        .frame(width: 700, alignment: .leading)
+    }
+}
+
+struct Resources: View {
+    @State var resourcesDetails = false
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "book.fill")
+                .foregroundColor(.blue)
+                .frame(width: 100, height: 100)
+                .font(.system(size: 48))
+                .padding(.trailing, 20)
+            VStack(alignment: .leading) {
+                Text("The resources and inspiration I have compiled from these references.")
+                Button {
+                    resourcesDetails.toggle()
+                } label: {
+                    Text("Click Here")
+                }
+                .sheet(isPresented: $resourcesDetails) {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "book.fill")
+                            .foregroundColor(.black)
+                            .frame(width: 50, height: 50)
+                            .font(.system(size: 48))
+                        Text("Resources")
+                            .font(.system(size: 26, weight: .medium))
+//                        Spacer()
+                        VStack(spacing: 20) {
+                            Text("Thanks for the information, pictures and inspiration.")
+                            Text("[ThaiTone](https://www.facebook.com/thaitonecolor)")
+                            Text("[Pairoj Pittayamatee](https://www.facebook.com/PairojPittayamatee)")
+                            Text("[Thaitone – Thai tone color Identity of Thai tone...know, not out of trend](https://www.baanlaesuan.com/58106/design/lifestyle/thaitone-2)")
+                            Text("[What is Ten Essential Traditional Craftsmenship](https://www.silpa-mag.com/art/article_96093)")
+                            Text("[Dr. Pairoj Pitayamethee, the proclamation of Thai independence](https://www.salika.co/2019/11/29/thaitone-color-by-pairoj-pittayamatee/)")
+                            Text("[Krayarong Thai-tone powder color](https://www.sarakadeelite.com/brand-story/krayarong-tempera/)")
+                            Text("[Photo Dharma from Sadao, Thailand - 075 Ramakien Murals](https://commons.wikimedia.org/w/index.php?curid=50835477)")
+                        }
+                        .padding([.top, .bottom], 50)
+                        Button {
+                            resourcesDetails.toggle()
+                        } label: {
+                            Text("Dismiss")
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding(80)
+                    Spacer()
+                }
+            }
+        }
+        .frame(width: 700, alignment: .leading)
     }
 }

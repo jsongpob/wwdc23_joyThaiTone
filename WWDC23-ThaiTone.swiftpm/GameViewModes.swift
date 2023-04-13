@@ -310,11 +310,11 @@ struct GameEndView: View {
     @EnvironmentObject var gameState: GameState
     
     var body: some View {
-        VStack {
-            Text("Congrats!")
-                .font(.system(size: 72, weight: .semibold, design: .rounded))
+        VStack(spacing: 20) {
+            Text("Congratulations!")
+                .font(.system(size: 82, weight: .semibold, design: .rounded))
                 .foregroundColor(.orange)
-            Text("You match \(gameState.currentRounds) colors!")
+            Text("You can match up to \(gameState.currentRounds) colors, great job.")
                 .font(.system(size: 28, weight: .semibold, design: .rounded))
         }
     }
@@ -325,11 +325,11 @@ struct GameFailView: View {
     @EnvironmentObject var gameState: GameState
     
     var body: some View {
-        VStack {
-            Text("Fail Game View")
-                .font(.system(size: 72, weight: .semibold, design: .rounded))
+        VStack(spacing: 20) {
+            Text("Game Over")
+                .font(.system(size: 82, weight: .semibold, design: .rounded))
                 .foregroundColor(.red)
-            Text("Timeout!")
+            Text("You don't have to regret it. try playing again You can do it!")
                 .font(.system(size: 28, weight: .semibold, design: .rounded))
         }
     }
@@ -340,11 +340,11 @@ struct GameReasonFailView: View {
     @EnvironmentObject var gameState: GameState
     
     var body: some View {
-        VStack {
-            Text("YOU FAIL")
-                .font(.system(size: 72, weight: .semibold, design: .rounded))
+        VStack(spacing: 20) {
+            Text("Game Over")
+                .font(.system(size: 82, weight: .semibold, design: .rounded))
                 .foregroundColor(.red)
-            Text("Fail of out!")
+            Text("You don't have to regret it. try playing again You can do it!")
                 .font(.system(size: 28, weight: .semibold, design: .rounded))
         }
     }
