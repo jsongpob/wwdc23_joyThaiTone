@@ -47,6 +47,7 @@ struct GameView: View {
                     VStack(spacing: 30) {
                         Text("Select Mode")
                             .font(.system(size: 36, weight: .semibold, design: .rounded))
+//                        Text("endTabUnlock: \(gameLevelData.endTabUnlock ? "true" : "false")")
                         //BUTTON MODE SELECT
                         VStack(spacing: 20) {
 
@@ -75,7 +76,7 @@ struct GameView: View {
                                         } label: {
                                             Image(systemName: "xmark.circle.fill")
                                                 .font(.system(size: 32))
-                                                .foregroundColor(.gray)
+//                                                .foregroundColor(.gray)
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                                         .padding(40)
@@ -94,13 +95,14 @@ struct GameView: View {
                             {
                                 gameState.gameIsHardModeShowing.toggle()
                                 gameState.gameMode = 2
+                                gameState.getColors()
                             } label:
                             {
                                 Text("Hard")
                                     .font(.title)
                                     .frame(width: 290, height: 50, alignment: .center)
                             }
-                            .disabled(true)
+                            .disabled(!gameLevelData.endTabUnlock)
                             .buttonStyle(.borderedProminent)
                             .fullScreenCover(isPresented: $gameState.gameIsHardModeShowing)
                             {
@@ -110,13 +112,13 @@ struct GameView: View {
                                     {
                                         Button
                                         {
-                                            gameState.gameIsNormalModeShowing.toggle()
+                                            gameState.gameIsHardModeShowing.toggle()
                                             gameState.gameReset()
                                         } label:
                                         {
                                             Image(systemName: "xmark.circle.fill")
                                                 .font(.system(size: 32))
-                                                .foregroundColor(.gray)
+//                                                .foregroundColor(.gray)
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                                         .padding(40)
@@ -133,16 +135,47 @@ struct GameView: View {
                             //ENDLESS
                             Button
                             {
-                                
+                                gameState.gameIsEndLessModeShowing.toggle()
+                                gameState.gameMode = 3
+                                gameState.getColors()
                             } label:
                             {
                                 Text("Endless")
                                     .font(.title)
                                     .frame(width: 290, height: 50, alignment: .center)
                             }
-                            .disabled(true)
+                            .disabled(!gameLevelData.endTabUnlock)
                             .buttonStyle(.borderedProminent)
+                            .fullScreenCover(isPresented: $gameState.gameIsEndLessModeShowing)
+                            {
+                                //CLOSE IN-GAME FULLSCREENCOVER
+                                ZStack {
+                                    if (gameState.gameStarted == false)
+                                    {
+                                        Button
+                                        {
+                                            gameState.gameIsEndLessModeShowing.toggle()
+                                            gameState.gameReset()
+                                        } label:
+                                        {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .font(.system(size: 32))
+//                                                .foregroundColor(.gray)
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                                        .padding(40)
+                                        .buttonStyle(.borderless)
+                                        .disabled(gameState.cancelGameDisable)
+                                    }
+                                    GamePlayView()
+                                }
+                            }
                             //ENDLESS
+                            if (!gameLevelData.endTabUnlock) {
+                                Text("Hard and endless mode It will be playable after unlocking all content and completing the game.")
+                                    .foregroundColor(.gray)
+                                    .padding(.top, 40)
+                            }
                             
                         }
                     }

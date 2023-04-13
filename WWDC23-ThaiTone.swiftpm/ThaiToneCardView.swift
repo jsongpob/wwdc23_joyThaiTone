@@ -105,6 +105,11 @@ struct ThaiToneCardView: View {
                             
                             Spacer()
                             
+                            Text("Read the Article")
+                                .font(.system(size: 18))
+                                .foregroundColor(.gray)
+                                .frame(width: 320, alignment: .trailing)
+                            
                             Button(action: {
                                 if (gameLevelData.wttsUnlockLevel == 3 && gameLevelData.wttscompleted != true) {
                                     gameLevelData.wttscompleted = true

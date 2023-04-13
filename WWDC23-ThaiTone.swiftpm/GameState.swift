@@ -12,14 +12,19 @@ class GameState: ObservableObject {
     
     @Published var gameIsNormalModeShowing = false
     @Published var gameIsHardModeShowing = false
+    @Published var gameIsEndLessModeShowing = false
     @Published var isModeSelectShowingSheet = false
     @Published var isEndGameViewShowingSheet = false
+    @Published var isShowName = true
     
     //INGAMES
+    
+    //NORMAL
     func NormalModeStart() {
         gameTimer()
         gameTotalTimerCountDown = 30.0
         gameTimerCountDown = 30.0
+        isShowName = true
         Sounds.playInGame(sound: "mixkit-game-level-music", type: "mp3")
     }
     func inGameNormalMode() {
@@ -27,7 +32,8 @@ class GameState: ObservableObject {
         //print("\(collection.name)")
         //print("+1")
         Sounds.play(sound: "mixkit-game-flute-bonus", type: "mp3")
-        getNewColorsRounds()
+//        getNewColorsRounds()
+        getNewColorsRoundsTest()
         randomColors()
         currentRounds += 1
 //        if (gameTimerCountDown < gameTotalTimerCountDown-2) {
@@ -53,6 +59,83 @@ class GameState: ObservableObject {
         }
     }
     
+    //HARD
+    func HardModeStart() {
+        gameTimer()
+        gameTotalTimerCountDown = 30.0
+        gameTimerCountDown = 30.0
+        isShowName = false
+        Sounds.playInGame(sound: "mixkit-game-level-music", type: "mp3")
+    }
+    func inGameHardMode() {
+        Sounds.play(sound: "mixkit-game-flute-bonus", type: "mp3")
+//        getNewColorsRounds()
+        getNewColorsRoundsTest()
+        randomColors()
+        currentRounds += 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            withAnimation {
+                self.backgroundColors = Color.white
+            }
+        }
+    }
+    func inGameHardModeFail() {
+        if (gameTimerCountDown >= 0)
+        {
+            currentFail += 1
+            Sounds.play(sound: "mixkit-video-game-power-up", type: "mp3")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation {
+                    self.backgroundColors = Color.white
+                }
+            }
+        }
+    }
+    
+    //ENDLESS
+    func EndLessModeStart() {
+        gameTimer()
+        gameTotalTimerCountDown = 10.0
+        gameTimerCountDown = 10.0
+        bonusTime = 0
+        isShowName = false
+        Sounds.playInGame(sound: "mixkit-game-level-music", type: "mp3")
+    }
+    func inGameEndLessMode() {
+        Sounds.play(sound: "mixkit-game-flute-bonus", type: "mp3")
+//        getNewColorsRounds()
+        getNewColorsRoundsTest()
+        randomColors()
+        currentRounds += 1
+        if (gameTimerCountDown < gameTotalTimerCountDown-2) {
+            gameTimerCountDown += 2
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            withAnimation {
+                self.backgroundColors = Color.white
+            }
+        }
+    }
+    func inGameEndLessModeFail() {
+        if (gameTimerCountDown >= 0)
+        {
+//            currentFail += 1
+            gameTimerCountDown -= 2
+            Sounds.play(sound: "mixkit-video-game-power-up", type: "mp3")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation {
+                    self.backgroundColors = Color.white
+                }
+            }
+        }
+    }
+    func isbonusTime() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            withAnimation {
+                    self.bonusTime = 0
+            }
+        }
+    }
     
     
     //COUNTDOWN
@@ -87,6 +170,8 @@ class GameState: ObservableObject {
             Sounds.audioPlayerInGame.stop()
         }
         countDownTimer = 8
+        maxCurrentRounds = 10
+        bonusTime = 0
         gameStarted = false
         gameMode = 0
         gameTimerStop()
@@ -125,11 +210,15 @@ class GameState: ObservableObject {
         }
     }
     
+    //ENDLESS MODE
+    @Published var bonusTime = 0
+    
     //GAME-TIMER
     @Published var gameTotalTimerCountDown: Float = 30.0
     @Published var gameTimerCountDown: Float = 30.0 {
         didSet {
             print("gameTimerCountDown = \(gameTimerCountDown)/\(gameTotalTimerCountDown)")
+//            print("maxCurrentRounds = \(maxCurrentRounds)")
             if (gameTimerCountDown == -1)
             {
                 Endgame = true
@@ -370,6 +459,7 @@ class GameState: ObservableObject {
     
     func getColors() {
         NormalCheck()
+        EndlessCheck()
         selectedColorsCollection = Array(colors.shuffled()[..<30]).sorted(by: { $0.hex < $1.hex })
     }
     
@@ -379,49 +469,69 @@ class GameState: ObservableObject {
         }
     }
     
-    func getNewColorsRounds() {
-        if (currentRounds == 10) {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
+    func EndlessCheck() {
+        if (gameMode == 3 && gameTimerCountDown < gameTotalTimerCountDown-2) {
+            gameTimerCountDown = gameTotalTimerCountDown
+            if (bonusTime == 0) {
+                bonusTime = 1
+            }
         }
-        else if (currentRounds == 20)
-        {
+    }
+    
+//    func getNewColorsRounds() {
+//        if (currentRounds == 10) {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 20)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 30)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 40)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 50)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 60)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 70)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 80)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//        else if (currentRounds == 90)
+//        {
+//            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+//            getColors()
+//        }
+//    }
+    
+    var maxCurrentRounds = 10
+    
+    func getNewColorsRoundsTest() {
+        if (currentRounds == maxCurrentRounds) {
             Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 30)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 40)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 50)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 60)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 70)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 80)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
-            getColors()
-        }
-        else if (currentRounds == 90)
-        {
-            Sounds.play(sound: "mixkit-arcade-bonus-alert", type: "mp3")
+            maxCurrentRounds += 10
+            print("maxCurrentRounds: \(maxCurrentRounds)")
             getColors()
         }
     }

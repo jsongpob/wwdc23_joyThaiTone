@@ -70,7 +70,15 @@ struct GamePlayView: View {
                 GameHardModeView()
                     .onAppear
                 {
-                    gameState.cancelGame()
+                    gameState.HardModeStart()
+                }
+            }
+            else if (gameState.gameStarted == true && gameState.gameMode == 3)
+            {
+                GameEndLessModeView()
+                    .onAppear
+                {
+                    gameState.EndLessModeStart()
                 }
             }
             else
@@ -154,12 +162,146 @@ struct GameNormalModeView: View {
 
 //HARD MODE
 struct GameHardModeView: View {
+
     @EnvironmentObject var gameState: GameState
     
+    let gridItems = Array(repeating: GridItem(.fixed(180), spacing: 16, alignment: .center), count: 7)
+    let adaptiveColumns = [GridItem(.adaptive(minimum: 550, maximum: .infinity), alignment: .center)]
+    
     var body: some View {
-        VStack {
-            Text("Hard Mode (in-game)")
-        }
+        //        if ()
+                HStack(spacing: 40) {
+                    Spacer()
+                    //LEFT VIEW
+                    VStack(alignment: .center, spacing: 20) {
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Round \(gameState.currentRounds) (Hard)")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                                .foregroundColor(.gray)
+                            Text("Find this ThaiTone color!")
+                                .font(.system(size: 36, weight: .semibold, design: .rounded))
+                        }
+                        Hexagon()
+                            .foregroundColor(gameState.randomColor)
+                            .frame(width: 330, height: 370, alignment: .center)
+                            .overlay {
+                                VStack {
+                                    Text("\(gameState.getColorName(for: gameState.hexCode))")
+                                        .font(.system(size: 28, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .onAppear
+                        {
+                            gameState.randomColors()
+                        }
+                        .onTapGesture
+                        {
+                            gameState.currentRounds += 1
+                        }
+                        
+                        ProgressView(value: gameState.gameTimerCountDown, total: gameState.gameTotalTimerCountDown) {
+                            HStack {
+                                Text("\(Int(gameState.gameTimerCountDown))s")
+                                    .font(.system(size: 25, weight: .semibold, design: .rounded))
+                                if (gameState.currentFail > 0)
+                                {
+                                    Text("(\(Int(gameState.currentFail))/5 Fail)")
+                                        .font(.system(size: 25, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.benjarongC2)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                        .progressViewStyle(LinearProgressViewStyle(tint: gameState.randomColor))
+                        .animation(.spring(),value: gameState.currentRounds)
+                        Spacer()
+                    }
+                    .frame(maxWidth: 400, maxHeight: .infinity)
+                    Collections()
+                    Spacer()
+                }
+                .background(gameState.backgroundColors)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
+    }
+}
+
+//ENDLESS MODE
+struct GameEndLessModeView: View {
+
+    @EnvironmentObject var gameState: GameState
+    
+    let gridItems = Array(repeating: GridItem(.fixed(180), spacing: 16, alignment: .center), count: 7)
+    let adaptiveColumns = [GridItem(.adaptive(minimum: 550, maximum: .infinity), alignment: .center)]
+    
+    var body: some View {
+        //        if ()
+                HStack(spacing: 40) {
+                    Spacer()
+                    //LEFT VIEW
+                    VStack(alignment: .center, spacing: 20) {
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Round \(gameState.currentRounds) (Endless)")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                                .foregroundColor(.gray)
+                            Text("Find this ThaiTone color!")
+                                .font(.system(size: 36, weight: .semibold, design: .rounded))
+                        }
+                        Hexagon()
+                            .foregroundColor(gameState.randomColor)
+                            .frame(width: 330, height: 370, alignment: .center)
+                            .overlay {
+                                VStack {
+                                    Text("\(gameState.getColorName(for: gameState.hexCode))")
+                                        .font(.system(size: 28, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .onAppear
+                        {
+                            gameState.randomColors()
+                        }
+                        .onTapGesture
+                        {
+                            gameState.currentRounds += 1
+                        }
+                        
+                        ProgressView(value: gameState.gameTimerCountDown, total: gameState.gameTotalTimerCountDown) {
+                            HStack {
+                                Text("\(Int(gameState.gameTimerCountDown))s")
+                                    .font(.system(size: 25, weight: .semibold, design: .rounded))
+                                if (gameState.currentFail > 0)
+                                {
+                                    Text("(\(Int(gameState.currentFail))/5 Fail)")
+                                        .font(.system(size: 25, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.benjarongC2)
+                                }
+                                if (gameState.bonusTime == 1)
+                                {
+                                    Text("+Bouns Time")
+                                        .font(.system(size: 25, weight: .semibold, design: .rounded))
+                                        .foregroundColor(gameState.randomColor)
+                                        .onAppear {
+                                            gameState.isbonusTime()
+                                        }
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                        .progressViewStyle(LinearProgressViewStyle(tint: gameState.randomColor))
+                        .animation(.spring(),value: gameState.currentRounds)
+                        Spacer()
+                    }
+                    .frame(maxWidth: 400, maxHeight: .infinity)
+                    CollectionsExtra()
+                    Spacer()
+                }
+                .background(gameState.backgroundColors)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -187,6 +329,8 @@ struct GameFailView: View {
             Text("Fail Game View")
                 .font(.system(size: 72, weight: .semibold, design: .rounded))
                 .foregroundColor(.red)
+            Text("Timeout!")
+                .font(.system(size: 28, weight: .semibold, design: .rounded))
         }
     }
 }
@@ -206,7 +350,7 @@ struct GameReasonFailView: View {
     }
 }
 
-//COLORS COLLECTIONS
+//COLORS COLLECTIONS NORMAL&HARD
 struct Collections: View {
     @EnvironmentObject var gameState: GameState
     let adaptive = [GridItem(.adaptive(minimum: 100, maximum: 280))]
@@ -227,12 +371,14 @@ struct Collections: View {
                             .cornerRadius(15)
                             .overlay
                                 {
-                                VStack
-                                {
-                                    Text(value.name)
-                                }
-                                .font(.system(size: value.name.count > 14 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
-                                .foregroundColor(.white)
+                                    if (gameState.isShowName == true) {
+                                        VStack
+                                        {
+                                            Text(value.name)
+                                        }
+                                        .font(.system(size: value.name.count > 14 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                    }
                             }
                             .onTapGesture
                                 {
@@ -244,6 +390,61 @@ struct Collections: View {
                                 else
                                 {
                                     gameState.inGameNormalModeFail()
+                                    gameState.backgroundColors = Color.lightgray2
+                                }
+                        }
+                    }
+                }
+            }
+            .animation(.spring(),value: gameState.currentRounds)
+            .padding(15)
+        }
+        .background(.white)
+        .cornerRadius(30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    }
+}
+
+//COLORS COLLECTIONS ENDLESS
+struct CollectionsExtra: View {
+    @EnvironmentObject var gameState: GameState
+    let adaptive = [GridItem(.adaptive(minimum: 100, maximum: 280))]
+    
+    var body: some View {
+        VStack {
+//            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 8) {
+            LazyVGrid(columns: adaptive, spacing: 10) {
+                ForEach(gameState.selectedColorsCollection, id: \.name) { value in
+                    VStack {
+                        Rectangle()
+                            .onAppear
+                            {
+                                print("\(value)")
+                            }
+                            .frame(minWidth: 80, idealWidth: 110, maxWidth: .infinity, minHeight: 80, idealHeight: 110, maxHeight: .infinity)
+                            .foregroundColor(Color(hex: value.hex))
+                            .cornerRadius(15)
+                            .overlay
+                                {
+                                    if (gameState.isShowName == true) {
+                                        VStack
+                                        {
+                                            Text(value.name)
+                                        }
+                                        .font(.system(size: value.name.count > 14 ? 10 : value.name.count < 12 ? 16 : 12, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                    }
+                            }
+                            .onTapGesture
+                                {
+                                if (value.name == gameState.getColorName(for: gameState.hexCode))
+                                {
+                                    gameState.inGameEndLessMode()
+                                    gameState.backgroundColors = Color(hex: value.hex)
+                                }
+                                else
+                                {
+                                    gameState.inGameEndLessModeFail()
                                     gameState.backgroundColors = Color.lightgray2
                                 }
                         }
