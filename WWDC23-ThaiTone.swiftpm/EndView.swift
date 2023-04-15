@@ -37,9 +37,9 @@ struct EndView: View {
                 Image("thaitone_star")
                     .resizable()
                     .frame(width: 400, height: 400, alignment: .center)
-                Text("Thank you for playing ThaiTone")
+                Text("Thank you for playing joyThaiTone")
                     .font(.system(size: 32, weight: .medium))
-                Text("Thank you for playing and learning with ThaiTone, I hope you like it and enjoy it. It was the beginning and development of my learning. And I hope it will be an inspiration to many more people. who like to play and learn together, thank you!")
+                Text("Thank you for learning and playing with joyThaiTone, I hope you like it and enjoy it. It was the beginning and development of my learning. And I hope it will be an inspiration to many more people. who like to play and learn together, thank you!")
                     .frame(width: 650)
                     .multilineTextAlignment(.center)
             }

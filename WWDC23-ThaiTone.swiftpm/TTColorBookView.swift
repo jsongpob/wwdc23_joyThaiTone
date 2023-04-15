@@ -194,7 +194,7 @@ struct TTColorBookView: View {
     //View
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 15) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
                 ForEach(colors) { color in
                     VStack {
                         Color(hex: color.hex)
@@ -205,7 +205,7 @@ struct TTColorBookView: View {
                                 gameLevelData.colorBookSelect += 1
                             }
                             .onAppear{
-                                print("\(color)")
+//                                print("\(colors.count)")
                             }
                         //                            .shadow(radius: 10)
                         //                            .overlay{
@@ -218,7 +218,7 @@ struct TTColorBookView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
+            .padding(.horizontal, 50)
         }
         .sheet(item: $selectedColor) { color in
             ColorDetailView(name: color.name, hex: color.hex)

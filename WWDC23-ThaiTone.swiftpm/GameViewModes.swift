@@ -18,6 +18,18 @@ struct CountDownView: View {
         VStack {
             if (gameState.countDownTimer >= 6)
             {
+                if (gameState.gameMode == 3) {
+                    Text("Endless mode")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                }
+                else if (gameState.gameMode == 2) {
+                    Text("Hard mode")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                }
+                else if (gameState.gameMode == 1) {
+                    Text("Normal mode")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                }
                 Text("Are you ready?")
                     .font(.system(size: 100, weight: .semibold, design: .rounded))
                 Button
@@ -463,7 +475,7 @@ struct CollectionsExtra: View {
 //PREVIEWS
 struct GameViewModes_Previews: PreviewProvider {
     static var previews: some View {
-        GamePlayView()
+        CountDownView()
             .environmentObject(GameState())
             .previewInterfaceOrientation(.landscapeRight)
     }

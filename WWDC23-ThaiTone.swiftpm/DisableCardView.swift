@@ -31,7 +31,7 @@ struct DisableCardView: View {
                 .foregroundColor(.black)
             Text(titlecard)
                 .font(.system(size: 27 ,weight: .bold))
-                .frame(maxWidth: 270, maxHeight: 30, alignment: .leading)
+                .frame(maxWidth: 270, maxHeight: 500, alignment: .leading)
                 .foregroundColor(.black)
                 .padding(.bottom, 25)
         }

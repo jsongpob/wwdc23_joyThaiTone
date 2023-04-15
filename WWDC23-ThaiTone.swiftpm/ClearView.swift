@@ -79,9 +79,9 @@ struct WelcomeView: View {
         Spacer()
         VStack(spacing: 20) {
             Text("Welcome to")
-            Text("ThaiTone")
+            Text("joyThaiTone")
                 .font(.system(size: 120, weight: .medium))
-            Text("Are you ready? For playing and learning with the story and history of the color that comes from Thailand called ThaiTone, the color that has been used for a long time and is inspired by the lives of the ancient Thai population. Isn't it interesting? If you're ready,\n let's get started!")
+            Text("Are you ready? For learning and playing with the story and history of the color that comes from Thailand called ThaiTone, the color that has been used for a long time and is inspired by the lives of the ancient Thai population. Isn't it interesting? If you're ready,\n let's get started!")
                 .frame(width: 700)
                 .multilineTextAlignment(.center)
         }

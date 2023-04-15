@@ -13,7 +13,7 @@ struct AboutView: View {
             //TITLE
             Text("About this app")
                 .font(.subheadline)
-            Text("ThaiTone")
+            Text("joyThaiTone")
                 .font(.system(size: 89, weight: .medium))
             //CONTENT
             VStack {
@@ -23,6 +23,9 @@ struct AboutView: View {
                     CallCardView(callicon: "person.fill", calltext: "I'm currently studying in Thailand in relation to user interface and user experience design. Including programming too! I really love learning these things because they can create something new and different. where I can put my own personality into it as well."
                     )
                     Resources()
+                    
+                    Text("For the best experience, I highly recommend playing on iPad Pro (11-inch) models in landscape and light mode.")
+                        .foregroundColor(.gray)
 
                 }
             }
@@ -94,6 +97,8 @@ struct Resources: View {
                             Text("[Dr. Pairoj Pitayamethee, the proclamation of Thai independence](https://www.salika.co/2019/11/29/thaitone-color-by-pairoj-pittayamatee/)")
                             Text("[Krayarong Thai-tone powder color](https://www.sarakadeelite.com/brand-story/krayarong-tempera/)")
                             Text("[Photo Dharma from Sadao, Thailand - 075 Ramakien Murals](https://commons.wikimedia.org/w/index.php?curid=50835477)")
+                            Text("[Color Blind Vision Simulator](https://pilestone.com/pages/color-blindness-simulator-1)")
+                            Text("Sounds: [Mixkit](https://mixkit.co/free-sound-effects/)")
                         }
                         .padding([.top, .bottom], 50)
                         Button {

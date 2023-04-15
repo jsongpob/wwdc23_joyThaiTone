@@ -31,9 +31,9 @@ struct ThaiToneCardView: View {
             
             //TITLE
             VStack {
-                Text("ThaiTone")
+                Text("joyThaiTone")
                     .font(.system(size: 48, weight: .bold))
-                Text("Play and learn to unlock new things in ThaiTone. Have fun!")
+                Text("Learn and play to unlock new things in ThaiTone. Have fun!")
                     .font(.title2)
                     .onTapGesture(count: 3) {
                         debuging.toggle()
@@ -88,7 +88,7 @@ struct ThaiToneCardView: View {
                 if (gameLevelData.GameLevel >= 1) {
                     //CARD LEARN
                     Button(action: { ThaiToneView.toggle() }) {
-                        CardView(titlecard: "What's ThaiTone", subtitlecard: "Learn", iconcard: "", cardimage: "thaitone_card", shadowcard: 30)
+                        CardView(titlecard: "What's ThaiTone", subtitlecard: "(1/3) Learn", iconcard: "", cardimage: "thaitone_card", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ThaiToneView, onDismiss: didDismiss) {
                         HStack {
@@ -128,7 +128,7 @@ struct ThaiToneCardView: View {
                         WhatThaiToneScene().environmentObject(gameLevelData)
                     }
                 } else {
-                    DisableCardView(titlecard: "???", subtitlecard: "learn", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
+                    DisableCardView(titlecard: "???", subtitlecard: "(1/3) Learn", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
                         .onAppear {
                             gameLevelData.FirstWelcomeView = true
                         }
@@ -139,34 +139,35 @@ struct ThaiToneCardView: View {
                     
                     //CARD TAKE A LOOK
                     Button(action: { ColorBookView.toggle() }) {
-                        CardView(titlecard: "ThaiTone Collection", subtitlecard: "Take a look", iconcard: "", cardimage: "colorsbook_card", shadowcard: 30)
+                        CardView(titlecard: "ThaiTone Collection", subtitlecard: "(2/3) Take a look", iconcard: "", cardimage: "colorsbook_card", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $ColorBookView, onDismiss: didDismiss) {
                         ScrollView {
                             HStack {
                                 VStack {
-                                    Text("take a look")
+                                    Text("take a look (168)")
                                         .font(.subheadline)
                                         .textCase(.uppercase)
-                                        .frame(width: 400, alignment: .leading)
+                                        .frame(width: 330, alignment: .leading)
                                     Text("ThaiTone Collection")
                                         .font(.system(size: 36, weight: .bold))
-                                        .frame(width: 400, alignment: .leading)
+                                        .frame(width: 330, alignment: .leading)
                                 }
-                                .frame(width: 400, height: 120, alignment: .leading)
+                                .frame(width: 330, height: 120, alignment: .leading)
                                 
                                 Spacer()
                                 
                                 if (gameLevelData.colorBookSelect < 5) {
-                                    Text("Select colors you like (\(gameLevelData.colorBookSelect)/5)")
-                                        .font(.system(size: 18))
+                                    Text("Challenge : try to select 5 colors you like \n(\(gameLevelData.colorBookSelect)/5)")
+                                        .font(.system(size: 16))
                                         .foregroundColor(.gray)
-                                        .frame(width: 320, alignment: .trailing)
+                                        .frame(width: 420, alignment: .trailing)
                                 } else {
-                                    Text("Select colors you like (5/5) Completed")
-                                        .font(.system(size: 18))
+                                    Text("Challenge : try to select 5 colors you like \n(5/5) Completed")
+                                        .font(.system(size: 16))
                                         .foregroundColor(.gray)
-                                        .frame(width: 320, alignment: .trailing)
+                                        .frame(width: 420, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
                                 }
                                 
                                 Button(action: {
@@ -188,7 +189,7 @@ struct ThaiToneCardView: View {
                     }
                 } else {
                     
-                    DisableCardView(titlecard: "???", subtitlecard: "take a look", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
+                    DisableCardView(titlecard: "???", subtitlecard: "(2/3) Take a Look", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
                     
                 }
                 
@@ -196,7 +197,7 @@ struct ThaiToneCardView: View {
                     
                     //CARD PLAY
                     Button(action: { FindGameView.toggle() }) {
-                        CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "", cardimage: "play_card", shadowcard: 30)
+                        CardView(titlecard: "Find ThaiTone", subtitlecard: "(3/3) Play", iconcard: "", cardimage: "play_card", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $FindGameView, onDismiss: didDismiss) {
                         ZStack {
@@ -234,7 +235,7 @@ struct ThaiToneCardView: View {
                     
                 } else {
                     
-                    DisableCardView(titlecard: "???", subtitlecard: "play", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
+                    DisableCardView(titlecard: "???", subtitlecard: "(3/3) play", iconcard: "lock.fill", cardimage: "", shadowcard: 10)
                     
                 }
                 

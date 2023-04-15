@@ -62,12 +62,14 @@ struct WhatThaiToneScene: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
                             Button(action: { isShowingSheetA.toggle() }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.gray)
+//                                Image(systemName: "xmark.circle.fill")
+//                                    .font(.system(size: 32))
+//                                    .foregroundColor(.gray)
+                                Text("DONE")
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             .padding(30)
+                            .buttonStyle(.bordered)
                         }
                     }
                     //END PAGE-1
@@ -94,12 +96,14 @@ struct WhatThaiToneScene: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
                             Button(action: { isShowingSheetB.toggle() }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.gray)
+//                                Image(systemName: "xmark.circle.fill")
+//                                    .font(.system(size: 32))
+//                                    .foregroundColor(.gray)
+                                Text("DONE")
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             .padding(30)
+                            .buttonStyle(.bordered)
                         }
                     }
                 }//END PAGE-2
@@ -131,12 +135,14 @@ struct WhatThaiToneScene: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
                             Button(action: { isShowingSheetC.toggle() }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.gray)
+//                                Image(systemName: "xmark.circle.fill")
+//                                    .font(.system(size: 32))
+//                                    .foregroundColor(.gray)
+                                Text("DONE")
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             .padding(30)
+                            .buttonStyle(.bordered)
                         }
                     }//END PAGE-3
                     

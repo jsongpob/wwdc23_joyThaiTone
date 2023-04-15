@@ -42,7 +42,7 @@ struct InspirationContent1: View {
                     .lineSpacing(8)
                 HStack {
                     Image(systemName: "arrow.right")
-                    Text("Scroll to read")
+                    Text("Scroll right to read")
                         .font(.system(size: 18, weight: .regular, design: .default))
                 }
             }
@@ -98,6 +98,17 @@ struct InspirationContent1: View {
 }
 
 struct InspirationContent2: View {
+    @State var colorblindes: Int = 0
+    
+    func colorblindesmode() {
+        if (colorblindes >= 4) {
+            self.colorblindes = 0
+        }
+        else {
+            self.colorblindes += 1
+        }
+    }
+    
     var body: some View {
         LazyHStack {
             Text("In the past, the group of Thai colors that appeared in the painting consisted of up to five primary colors. 'Benjarong Colors' consists of black, white, red, yellow, and indigo. Each color can be mixed to create 10 more beautiful colors that we can see in Thai art, such as paintings. wall art work by Ten Essential Traditional Craftsmenship")
@@ -105,22 +116,126 @@ struct InspirationContent2: View {
                 .frame(maxWidth: 700, maxHeight: 300, alignment: .leading)
                 .padding(.horizontal, 60)
             
-            HStack(spacing: 30) {
-                Rectangle()
-                    .foregroundColor(.black)
-                    .frame(width: 160, height: 160, alignment: .center)
-                Rectangle()
-                    .foregroundColor(Color.benjarongC1)
-                    .frame(width: 160, height: 160, alignment: .center)
-                Rectangle()
-                    .foregroundColor(Color.benjarongC2)
-                    .frame(width: 160, height: 160, alignment: .center)
-                Rectangle()
-                    .foregroundColor(Color.benjarongC3)
-                    .frame(width: 160, height: 160, alignment: .center)
-                Rectangle()
-                    .foregroundColor(Color.benjarongC4)
-                    .frame(width: 160, height: 160, alignment: .center)
+            VStack {
+                if (colorblindes == 0) {
+                    Text("Color Blind Vision: Normal")
+                }
+                else if (colorblindes == 1) {
+                    Text("Color Blind Vision: Deuteranomaly")
+                }
+                else if (colorblindes == 2) {
+                    Text("Color Blind Vision: Protanomaly")
+                }
+                else if (colorblindes == 3) {
+                    Text("Color Blind Vision: Tritanomaly")
+                }
+                else if (colorblindes == 4) {
+                    Text("Color Blind Vision: Achromatopsia")
+                }
+
+                if (colorblindes == 0) {
+                HStack(spacing: 30) {
+                        Rectangle()
+                            .foregroundColor(.black)
+                            .frame(width: 160, height: 160, alignment: .center)
+                        Rectangle()
+                            .foregroundColor(Color.benjarongC1)
+                            .frame(width: 160, height: 160, alignment: .center)
+                        Rectangle()
+                            .foregroundColor(Color.benjarongC2)
+                            .frame(width: 160, height: 160, alignment: .center)
+                        Rectangle()
+                            .foregroundColor(Color.benjarongC3)
+                            .frame(width: 160, height: 160, alignment: .center)
+                        Rectangle()
+                            .foregroundColor(Color.benjarongC4)
+                            .frame(width: 160, height: 160, alignment: .center)
+                    }
+                }
+                else if (colorblindes == 1) {
+                    HStack(spacing: 30) {
+                            Rectangle()
+                            .foregroundColor(Color.deutanben1)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.deutanben2)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.deutanben3)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.deutanben4)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.deutanben5)
+                                .frame(width: 160, height: 160, alignment: .center)
+                        }
+                }
+                else if (colorblindes == 2) {
+                    HStack(spacing: 30) {
+                            Rectangle()
+                            .foregroundColor(Color.protanBen1)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.protanBen2)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.protanBen3)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.protanBen4)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.protanBen5)
+                                .frame(width: 160, height: 160, alignment: .center)
+                        }
+                }
+                else if (colorblindes == 3) {
+                    HStack(spacing: 30) {
+                            Rectangle()
+                            .foregroundColor(Color.tritanBen1)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.tritanBen2)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.tritanBen3)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.tritanBen4)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.tritanBen5)
+                                .frame(width: 160, height: 160, alignment: .center)
+                        }
+                }
+                else if (colorblindes == 4) {
+                    HStack(spacing: 30) {
+                            Rectangle()
+                            .foregroundColor(Color.monochromBen1)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.monochromBen2)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.monochromBen3)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.monochromBen4)
+                                .frame(width: 160, height: 160, alignment: .center)
+                            Rectangle()
+                                .foregroundColor(Color.monochromBen5)
+                                .frame(width: 160, height: 160, alignment: .center)
+                        }
+                }
+                Button {
+                    colorblindesmode()
+                } label: {
+                    Text("CHANGE")
+                }
+                .buttonStyle(.bordered)
+                .padding(.top, 20)
+
             }
         }
     }
@@ -239,7 +354,7 @@ struct OriginatorContent1: View {
                     .lineSpacing(8)
                 HStack {
                     Image(systemName: "arrow.right")
-                    Text("Scroll to read")
+                    Text("Scroll right to read")
                         .font(.system(size: 18, weight: .regular, design: .default))
                 }
             }
@@ -267,14 +382,83 @@ struct OriginatorContent1: View {
 }
 
 struct OriginatorContent2: View {
+    @State var colorblindes: Int = 0
+    
+    func colorblindesmode() {
+        if (colorblindes >= 4) {
+            self.colorblindes = 0
+        }
+        else {
+            self.colorblindes += 1
+        }
+    }
+    
     var body: some View {
         LazyHStack {
-            Image("ramayanawar")
-                .interpolation(.low)
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: 4000, maxHeight: 600)
-                .clipped()
-                .padding(40)
+            VStack {
+                if (colorblindes == 0) {
+                    VStack {
+                        Text("Color Blind Vision: Normal")
+                        Image("ramayanawar")
+                            .interpolation(.low)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 4000, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 1) {
+                    VStack {
+                        Text("Color Blind Vision: Deuteranomaly")
+                        Image("ramayanawar_deutan")
+                            .interpolation(.low)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 4000, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 2) {
+                    VStack {
+                        Text("Color Blind Vision: Protanomaly")
+                        Image("ramayanawar_protan")
+                            .interpolation(.low)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 4000, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 3) {
+                    VStack {
+                        Text("Color Blind Vision: Tritanomaly")
+                        Image("ramayanawar_tritan")
+                            .interpolation(.low)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 4000, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 4) {
+                    VStack {
+                        Text("Color Blind Vision: Achromatopsia")
+                        Image("ramayanawar_monochrom")
+                            .interpolation(.low)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 4000, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                Button {
+                    colorblindesmode()
+                } label: {
+                    Text("CHANGE")
+                }
+                .buttonStyle(.bordered)
+                .padding(.top, 20)
+            }
             Text("A study of the use of Thai colors Ancient Thai color combinations Both from experts in textbooks and from various books. Then bring this knowledge together to synthesize and create a color database with color values set according to the international color system. and to study the belief in the use of Buddhist colors that have profound multidimensionality, and then use the acquired knowledge to create works on the topic.")
                 .font(.title2)
                 .frame(maxWidth: 750, maxHeight: 350, alignment: .leading)
@@ -286,10 +470,14 @@ struct OriginatorContent2: View {
                 .padding(.leading, 30)
                 .font(.system(size: 72, weight: .bold, design: .default))
                 .lineSpacing(8)
-            Rectangle()
-                .padding(.leading, 30)
-                .foregroundColor(Color.creation)
-                .frame(width: 160, height: 600, alignment: .center)
+            VStack {
+                Rectangle()
+                    .padding(.leading, 30)
+                    .foregroundColor(Color.creation)
+                    .frame(width: 160, height: 600, alignment: .center)
+                Text("Khiaokaikrud")
+                    .padding(.leading, 30)
+            }
         }
     }
 }
@@ -312,10 +500,13 @@ struct OriginatorContent3: View {
                 .font(.title2)
                 .frame(maxWidth: 650, maxHeight: 350, alignment: .leading)
                 .padding(.leading, 100)
-            Rectangle()
-                .padding(.leading, 30)
-                .foregroundColor(Color.benjarongC2)
-                .frame(width: 450, height: 600, alignment: .center)
+            VStack {
+                Rectangle()
+                    .padding(.leading, 30)
+                    .foregroundColor(Color.benjarongC2)
+                    .frame(width: 450, height: 600, alignment: .center)
+                Text("Dangchad")
+            }
             Text("The aesthetics of materials in Thai tones that come from nature aesthetics in Thai colors that are beautiful because it is a natural colors. Aesthetics in the name of Thai colors that are used to name each series of works are Thong Phuttha, Kram Yard, Mahanatee Sithandon, and Chad Daowadung. Benefits of this research and creation Not only for the preservation of cultural heritage not to be lost. but to establish the standard of the Thai color scheme according to the international color system in order to bring creativity Art and design have become easier and more widespread.")
                 .font(.title2)
                 .frame(maxWidth: 1000, maxHeight: 350, alignment: .leading)
@@ -370,7 +561,7 @@ struct OriginsContent1: View {
                     .lineSpacing(8)
                 HStack {
                     Image(systemName: "arrow.right")
-                    Text("Scroll to read")
+                    Text("Scroll right to read")
                         .font(.system(size: 18, weight: .regular, design: .default))
                 }
             }
@@ -423,15 +614,88 @@ struct OriginsContent1: View {
 }
 
 struct OriginsContent2: View {
+    @State var colorblindes: Int = 0
+    
+    func colorblindesmode() {
+        if (colorblindes >= 4) {
+            self.colorblindes = 0
+        }
+        else {
+            self.colorblindes += 1
+        }
+    }
+    
     var body: some View {
         LazyHStack {
-            Image("thaitoneOriginal")
-                .interpolation(.low)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: 900, maxHeight: 600)
-                .clipped()
-                .padding(40)
+            VStack {
+                if (colorblindes == 0) {
+                    VStack {
+                        Text("Color Blind Vision: Normal")
+                        Image("thaitoneOriginal")
+                            .interpolation(.low)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 900, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 1) {
+                    VStack {
+                        Text("Color Blind Vision: Deuteranomaly")
+                        Image("thaitoneOriginal_deutan")
+                            .interpolation(.low)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 900, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 2) {
+                    VStack {
+                        Text("Color Blind Vision: Protanomaly")
+                        Image("thaitoneOriginal_protan")
+                            .interpolation(.low)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 900, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 3) {
+                    VStack {
+                        Text("Color Blind Vision: Tritanomaly")
+                        Image("thaitoneOriginal_tritan")
+                            .interpolation(.low)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 900, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                else if (colorblindes == 4) {
+                    VStack {
+                        Text("Color Blind Vision: Achromatopsia")
+                        Image("thaitoneOriginal_monochrom")
+                            .interpolation(.low)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 900, maxHeight: 500)
+                            .clipped()
+                            .padding(40)
+                    }
+                }
+                Button {
+                    colorblindesmode()
+                } label: {
+                    Text("CHANGE")
+                }
+                .buttonStyle(.bordered)
+                .padding(.top, 20)
+            }
             Text("That idea made Dr. Pairoj Pitayamethee go to meet with Weeratham Trakulngernthai to consult with him on the topic of Thai colors. In addition, he also gave a Colors Jar of about 20 colors that he had made himself. Made from crushed earth, stone, and other natural materials.")
                 .font(.title2)
                 .frame(maxWidth: 690, maxHeight: 350, alignment: .leading)
@@ -455,11 +719,15 @@ struct OriginsContent2: View {
             .frame(maxWidth: 690, maxHeight: 350, alignment: .leading)
             .padding(.leading, 100)
             
-            Rectangle()
-                .padding(.leading, 30)
-                .foregroundColor(Color.origins1)
-                .frame(width: 600, height: 600, alignment: .center)
-                .padding(.leading, 100)
+            VStack {
+                Rectangle()
+                    .padding(.leading, 30)
+                    .foregroundColor(Color.origins1)
+                    .frame(width: 600, height: 600, alignment: .center)
+                    .padding(.leading, 100)
+                Text("Dokbanyen")
+                    .padding(.leading, 100)
+            }
         }
     }
 }
@@ -476,11 +744,15 @@ struct OriginsContent3: View {
             .frame(maxWidth: 690, maxHeight: 350, alignment: .leading)
             .padding(.leading, 100)
             
-            Rectangle()
-                .padding(.leading, 30)
-                .foregroundColor(Color.origins2)
-                .frame(width: 600, height: 600, alignment: .center)
-                .padding(.leading, 100)
+            VStack {
+                Rectangle()
+                    .padding(.leading, 30)
+                    .foregroundColor(Color.origins2)
+                    .frame(width: 600, height: 600, alignment: .center)
+                    .padding(.leading, 100)
+                Text("Hongsen")
+                    .padding(.leading, 100)
+            }
             Image("thaitoneOriginal3")
                 .interpolation(.low)
                 .resizable()
@@ -514,4 +786,24 @@ extension Color {
     static let creation = Color("creation")
     static let origins1 = Color("origins1")
     static let origins2 = Color("origins2")
+    static let deutanben1 = Color("deutanBen1")
+    static let deutanben2 = Color("deutanBen2")
+    static let deutanben3 = Color("deutanBen3")
+    static let deutanben4 = Color("deutanBen4")
+    static let deutanben5 = Color("deutanBen5")
+    static let protanBen1 = Color("protanBen1")
+    static let protanBen2 = Color("protanBen2")
+    static let protanBen3 = Color("protanBen3")
+    static let protanBen4 = Color("protanBen4")
+    static let protanBen5 = Color("protanBen5")
+    static let tritanBen1 = Color("tritanBen1")
+    static let tritanBen2 = Color("tritanBen2")
+    static let tritanBen3 = Color("tritanBen3")
+    static let tritanBen4 = Color("tritanBen4")
+    static let tritanBen5 = Color("tritanBen5")
+    static let monochromBen1 = Color("monochromBen1")
+    static let monochromBen2 = Color("monochromBen2")
+    static let monochromBen3 = Color("monochromBen3")
+    static let monochromBen4 = Color("monochromBen4")
+    static let monochromBen5 = Color("monochromBen5")
 }
