@@ -333,6 +333,7 @@ struct GameEndView: View {
                 Button {
                     gameLevelData.FindGameView = false
                     gameState.isEndGameViewShowingSheet = false
+                    gameState.currentRounds = 0
                     if (gameLevelData.EndOneTime == true && gameLevelData.endTabUnlock == false) {
                         gameLevelData.endTabUnlock = true
                         gameLevelData.EndGameView = true

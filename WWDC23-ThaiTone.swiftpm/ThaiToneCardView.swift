@@ -160,6 +160,7 @@ struct ThaiToneCardView: View {
                                         .font(.system(size: 16))
                                         .foregroundColor(.gray)
                                         .frame(width: 420, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
                                 } else {
                                     Text("Challenge : try to select 5 colors you like \n(5/5) Completed")
                                         .font(.system(size: 16))
