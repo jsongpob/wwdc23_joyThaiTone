@@ -196,7 +196,7 @@ struct ThaiToneCardView: View {
                     
                     //CARD PLAY
                     Button(action: { gameLevelData.FindGameView.toggle() }) {
-                        CardView(titlecard: "Find ThaiTone", subtitlecard: "(3/3) Play", iconcard: "", cardimage: "play_card", shadowcard: 30)
+                        CardView(titlecard: "ThaiTone Match", subtitlecard: "(3/3) Play", iconcard: "", cardimage: "play_card", shadowcard: 30)
                     }
                     .fullScreenCover(isPresented: $gameLevelData.FindGameView, onDismiss: didDismiss) {
                         ZStack {

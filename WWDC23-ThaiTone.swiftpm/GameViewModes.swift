@@ -27,7 +27,7 @@ struct CountDownView: View {
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                 }
                 else if (gameState.gameMode == 1) {
-                    Text("Normal mode")
+                    Text("Basic mode")
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                 }
                 Text("Are you ready?")

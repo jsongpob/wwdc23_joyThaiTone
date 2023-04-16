@@ -24,6 +24,8 @@ struct GameView: View {
             //TITLE
             Text("ThaiTone Match")
                 .font(.system(size: 48, weight: .semibold, design: .rounded))
+            Text("Enjoy with 3 mode, Basic, Hard and Endless")
+                .font(.system(size: 20, weight: .regular, design: .rounded))
             
             //BIG BUTTON PLAY
             ZStack
@@ -59,7 +61,7 @@ struct GameView: View {
                                 gameState.getColors()
                             } label:
                             {
-                                Text("Normal")
+                                Text("Basic")
                                     .font(.title)
                                     .frame(width: 290, height: 50, alignment: .center)
                             }

@@ -32,7 +32,7 @@ struct EndView: View {
 //            .padding(10)
             
             VStack(spacing: 30) {
-                Text("Congratulation!")
+                Text("Congratulations!")
                     .font(.system(size: 38, weight: .bold))
                 Image("thaitone_star")
                     .resizable()
