@@ -20,8 +20,6 @@ struct ThaiToneCardView: View {
     
     @State private var ThaiToneView = false
     @State private var ColorBookView = false
-    @State private var FindGameView = false
-    @State private var EndGameView = false
     
     @State var debuging = false
     
@@ -196,10 +194,10 @@ struct ThaiToneCardView: View {
                 if (gameLevelData.GameLevel >= 3) {
                     
                     //CARD PLAY
-                    Button(action: { FindGameView.toggle() }) {
+                    Button(action: { gameLevelData.FindGameView.toggle() }) {
                         CardView(titlecard: "Find ThaiTone", subtitlecard: "(3/3) Play", iconcard: "", cardimage: "play_card", shadowcard: 30)
                     }
-                    .fullScreenCover(isPresented: $FindGameView, onDismiss: didDismiss) {
+                    .fullScreenCover(isPresented: $gameLevelData.FindGameView, onDismiss: didDismiss) {
                         ZStack {
                             HStack {
 //                                VStack {
@@ -214,10 +212,10 @@ struct ThaiToneCardView: View {
 //                                .frame(width: 400, height: 120, alignment: .leading)
 //                                Spacer()
                                 Button(action: {
-                                    FindGameView.toggle()
+                                    gameLevelData.FindGameView.toggle()
                                     if (gameLevelData.EndOneTime == true && gameLevelData.endTabUnlock == false) {
                                         gameLevelData.endTabUnlock = true
-                                        EndGameView = true
+                                        gameLevelData.EndGameView = true
                                         gameLevelData.GameLevel = 4
                                     }
                                 }) {
@@ -240,10 +238,10 @@ struct ThaiToneCardView: View {
                 }
                 
                 if (gameLevelData.endTabUnlock == true) {
-                    Button(action: { EndGameView.toggle() }) {
+                    Button(action: { gameLevelData.EndGameView.toggle() }) {
 //                        CardView(titlecard: "Find ThaiTone", subtitlecard: "Play", iconcard: "", cardimage: "Art-3", shadowcard: 30)
                     }
-                    .fullScreenCover(isPresented: $EndGameView, onDismiss: didDismiss) {
+                    .fullScreenCover(isPresented: $gameLevelData.EndGameView, onDismiss: didDismiss) {
                         ZStack {
                             HStack {
 //                                VStack {
@@ -257,7 +255,7 @@ struct ThaiToneCardView: View {
 //                                }
 //                                .frame(width: 400, height: 120, alignment: .leading)
 //                                Spacer()
-                                Button(action: { EndGameView.toggle() }) {
+                                Button(action: { gameLevelData.EndGameView.toggle() }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .font(.system(size: 32))
                                         .foregroundColor(.gray)
@@ -280,14 +278,14 @@ struct ThaiToneCardView: View {
             .padding([.leading, .trailing], 100)
             //            .padding(.bottom, 50)
             
-            Button {
-                EndGameView.toggle()
-            } label: {
-//                Text("111")
-            }
-            .fullScreenCover(isPresented: $EndGameView, onDismiss: didDismiss) {
-                Text("TRUE END VIEW")
-            }
+//            Button {
+//                gameLevelData.EndGameView.toggle()
+//            } label: {
+////                Text("111")
+//            }
+//            .fullScreenCover(isPresented: $gameLevelData.EndGameView, onDismiss: didDismiss) {
+//                Text("TRUE END VIEW")
+//            }
 
             
             Spacer()

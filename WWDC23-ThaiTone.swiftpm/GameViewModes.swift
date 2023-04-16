@@ -320,6 +320,7 @@ struct GameEndLessModeView: View {
 //ENDVIEW
 struct GameEndView: View {
     @EnvironmentObject var gameState: GameState
+    @EnvironmentObject var gameLevelData: GameLevelData
     
     var body: some View {
         VStack(spacing: 20) {
@@ -328,6 +329,24 @@ struct GameEndView: View {
                 .foregroundColor(.orange)
             Text("You can match up to \(gameState.currentRounds) colors, great job.")
                 .font(.system(size: 28, weight: .semibold, design: .rounded))
+            if (gameLevelData.EndOneTime == true && gameLevelData.endTabUnlock == false) {
+                Button {
+                    gameLevelData.FindGameView = false
+                    gameState.isEndGameViewShowingSheet = false
+                    if (gameLevelData.EndOneTime == true && gameLevelData.endTabUnlock == false) {
+                        gameLevelData.endTabUnlock = true
+                        gameLevelData.EndGameView = true
+                        gameLevelData.GameLevel = 4
+                    }
+                } label: {
+                    Text("DONE")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .frame(width: 200, height: 40)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.top, 60)
+
+            }
         }
     }
 }

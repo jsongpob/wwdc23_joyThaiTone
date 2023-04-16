@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 class GameLevelData: ObservableObject {
+    @Published var FindGameView = false
+    @Published var EndGameView = false
+    
     @Published var endTabUnlock: Bool = UserDefaults.standard.bool(forKey: "endTablUnlock") {
         didSet {
             if (endTabUnlock == true && GameLevel == 3) {

@@ -43,7 +43,7 @@ struct ClearView: View {
                 if (gameLevelData.endTabUnlock == true) {
                     EndView()
                         .tabItem {
-                            Label("End", systemImage: "star")
+                            Label("Complete", systemImage: "checkmark.seal.fill")
                         }
                         .badge("")
                 }

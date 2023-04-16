@@ -201,22 +201,43 @@ struct GameView: View {
             .sheet(isPresented: $gameState.isEndGameViewShowingSheet)
             {
                 ZStack {
-                    Button {
-                        if (gameState.gameFail == true)
+                    if (gameLevelData.EndOneTime == false && gameLevelData.endTabUnlock == false && gameState.currentRounds >= 0) {
+                        Button {
+                            if (gameState.gameFail == true)
+                            {
+                                gameState.gameFail = false
+                            }
+                            gameState.currentRounds = 0
+                            gameState.isEndGameViewShowingSheet.toggle()
+                        } label:
                         {
-                            gameState.gameFail = false
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.gray)
                         }
-                        gameState.currentRounds = 0
-                        gameState.isEndGameViewShowingSheet.toggle()
-                    } label:
-                    {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        .padding(40)
+                        .buttonStyle(.borderless)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .padding(40)
-                    .buttonStyle(.borderless)
+                    if (gameLevelData.endTabUnlock == true) {
+                        Button {
+                            if (gameState.gameFail == true)
+                            {
+                                gameState.gameFail = false
+                            }
+                            gameState.currentRounds = 0
+                            gameState.isEndGameViewShowingSheet.toggle()
+                        } label:
+                        {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.gray)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        .padding(40)
+                        .buttonStyle(.borderless)
+                    }
+                        
                     
                     
                     
