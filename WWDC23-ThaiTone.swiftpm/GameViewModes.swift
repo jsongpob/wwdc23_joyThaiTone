@@ -120,7 +120,7 @@ struct GameNormalModeView: View {
             VStack(alignment: .center, spacing: 20) {
                 Spacer()
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Round \(gameState.currentRounds) (Normal)")
+                    Text("Round \(gameState.currentRounds) (Basic)")
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
                         .foregroundColor(.gray)
                     Text("Find this ThaiTone color!")
