@@ -117,21 +117,10 @@ struct InspirationContent2: View {
                 .padding(.horizontal, 60)
             
             VStack {
-                if (colorblindes == 0) {
-                    Text("Color Blind Vision: Normal")
-                }
-                else if (colorblindes == 1) {
-                    Text("Color Blind Vision: Deuteranomaly")
-                }
-                else if (colorblindes == 2) {
-                    Text("Color Blind Vision: Protanomaly")
-                }
-                else if (colorblindes == 3) {
-                    Text("Color Blind Vision: Tritanomaly")
-                }
-                else if (colorblindes == 4) {
-                    Text("Color Blind Vision: Achromatopsia")
-                }
+                Text("What Do Color Blind People See?")
+                    .font(.largeTitle.bold())
+                Text("Try to be more understanding of different people")
+                    .padding(.bottom, 20)
 
                 if (colorblindes == 0) {
                 HStack(spacing: 30) {
@@ -228,10 +217,30 @@ struct InspirationContent2: View {
                                 .frame(width: 160, height: 160, alignment: .center)
                         }
                 }
+                if (colorblindes == 0) {
+                    Text("Color Blind Vision Simulate: Normal")
+                        .padding(.top, 20)
+                }
+                else if (colorblindes == 1) {
+                    Text("Color Blind Vision Simulate: Deuteranomaly (Green-Weak)")
+                        .padding(.top, 20)
+                }
+                else if (colorblindes == 2) {
+                    Text("Color Blind Vision Simulate: Protanomaly (Red-Weak)")
+                        .padding(.top, 20)
+                }
+                else if (colorblindes == 3) {
+                    Text("Color Blind Vision Simulate: Tritanomaly (Blue-Weak)")
+                        .padding(.top, 20)
+                }
+                else if (colorblindes == 4) {
+                    Text("Color Blind Vision Simulate: Achromatopsia (Black/White)")
+                        .padding(.top, 20)
+                }
                 Button {
                     colorblindesmode()
                 } label: {
-                    Text("CHANGE")
+                    Text("SEE MORE SIMULATE")
                 }
                 .buttonStyle(.bordered)
                 .padding(.top, 20)
@@ -398,63 +407,78 @@ struct OriginatorContent2: View {
             VStack {
                 if (colorblindes == 0) {
                     VStack {
-                        Text("Color Blind Vision: Normal")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
                         Image("ramayanawar")
                             .interpolation(.low)
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 4000, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        Text("Color Blind Vision Simulate: Normal")
                     }
                 }
                 else if (colorblindes == 1) {
                     VStack {
-                        Text("Color Blind Vision: Deuteranomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
                         Image("ramayanawar_deutan")
                             .interpolation(.low)
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 4000, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        Text("Color Blind Vision Simulate: Deuteranomaly (Green-Weak)")
                     }
                 }
                 else if (colorblindes == 2) {
                     VStack {
-                        Text("Color Blind Vision: Protanomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
                         Image("ramayanawar_protan")
                             .interpolation(.low)
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 4000, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        Text("Color Blind Vision Simulate: Protanomaly (Red-Weak)")
                     }
                 }
                 else if (colorblindes == 3) {
                     VStack {
-                        Text("Color Blind Vision: Tritanomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
                         Image("ramayanawar_tritan")
                             .interpolation(.low)
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 4000, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        Text("Color Blind Vision Simulate: Tritanomaly (Blue-Weak)")
                     }
                 }
                 else if (colorblindes == 4) {
                     VStack {
-                        Text("Color Blind Vision: Achromatopsia")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
                         Image("ramayanawar_monochrom")
                             .interpolation(.low)
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 4000, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        Text("Color Blind Vision Simulate: Achromatopsia (Black/White)")
                     }
                 }
                 Button {
                     colorblindesmode()
                 } label: {
-                    Text("CHANGE")
+                    Text("SEE MORE SIMULATE")
                 }
                 .buttonStyle(.bordered)
                 .padding(.top, 20)
@@ -475,8 +499,9 @@ struct OriginatorContent2: View {
                     .padding(.leading, 30)
                     .foregroundColor(Color.creation)
                     .frame(width: 160, height: 600, alignment: .center)
-                Text("Khiaokaikrud")
+                Text("Color Name: \"Khiao-kai-krud\" \n(Thai: เขียวไข่ครุฑ)")
                     .padding(.leading, 30)
+                    .multilineTextAlignment(.center)
             }
         }
     }
@@ -505,7 +530,8 @@ struct OriginatorContent3: View {
                     .padding(.leading, 30)
                     .foregroundColor(Color.benjarongC2)
                     .frame(width: 450, height: 600, alignment: .center)
-                Text("Dangchad")
+                Text("Color Name: \"Dang-chad\" \n(Thai: แดงชาด)")
+                    .multilineTextAlignment(.center)
             }
             Text("The aesthetics of materials in Thai tones that come from nature aesthetics in Thai colors that are beautiful because it is a natural colors. Aesthetics in the name of Thai colors that are used to name each series of works are Thong Phuttha, Kram Yard, Mahanatee Sithandon, and Chad Daowadung. Benefits of this research and creation Not only for the preservation of cultural heritage not to be lost. but to establish the standard of the Thai color scheme according to the international color system in order to bring creativity Art and design have become easier and more widespread.")
                 .font(.title2)
@@ -630,68 +656,93 @@ struct OriginsContent2: View {
             VStack {
                 if (colorblindes == 0) {
                     VStack {
-                        Text("Color Blind Vision: Normal")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
+                        
                         Image("thaitoneOriginal")
                             .interpolation(.low)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 900, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        
+                        Text("Color Blind Vision Simulate: Normal")
                     }
                 }
                 else if (colorblindes == 1) {
                     VStack {
-                        Text("Color Blind Vision: Deuteranomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
+                        
                         Image("thaitoneOriginal_deutan")
                             .interpolation(.low)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 900, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        
+                        Text("Color Blind Vision Simulate: Deuteranomaly (Green-Weak)")
                     }
                 }
                 else if (colorblindes == 2) {
                     VStack {
-                        Text("Color Blind Vision: Protanomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
+                        
                         Image("thaitoneOriginal_protan")
                             .interpolation(.low)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 900, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        
+                        Text("Color Blind Vision Simulate: Protanomaly (Red-Weak)")
                     }
                 }
                 else if (colorblindes == 3) {
                     VStack {
-                        Text("Color Blind Vision: Tritanomaly")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
+                        
                         Image("thaitoneOriginal_tritan")
                             .interpolation(.low)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 900, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        
+                        Text("Color Blind Vision Simulate: Tritanomaly (Blue-Weak)")
                     }
                 }
                 else if (colorblindes == 4) {
                     VStack {
-                        Text("Color Blind Vision: Achromatopsia")
+                        Text("What Do Color Blind People See?")
+                            .font(.largeTitle.bold())
+                        Text("Try to be more understanding of different people")
+                        
                         Image("thaitoneOriginal_monochrom")
                             .interpolation(.low)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: 900, maxHeight: 500)
                             .clipped()
-                            .padding(40)
+                            .padding(.horizontal, 40)
+                        
+                        Text("Color Blind Vision Simulate: Achromatopsia (Black/White)")
                     }
                 }
                 Button {
                     colorblindesmode()
                 } label: {
-                    Text("CHANGE")
+                    Text("SEE MORE SIMULATE")
                 }
                 .buttonStyle(.bordered)
                 .padding(.top, 20)
@@ -725,7 +776,7 @@ struct OriginsContent2: View {
                     .foregroundColor(Color.origins1)
                     .frame(width: 600, height: 600, alignment: .center)
                     .padding(.leading, 100)
-                Text("Dokbanyen")
+                Text("Color Name: \"Dok-ban-yen\" (Thai: ดอกบานเย็น)")
                     .padding(.leading, 100)
             }
         }
@@ -750,7 +801,7 @@ struct OriginsContent3: View {
                     .foregroundColor(Color.origins2)
                     .frame(width: 600, height: 600, alignment: .center)
                     .padding(.leading, 100)
-                Text("Hongsen")
+                Text("Color Name: \"Hong-sen\" (Thai: หงเสน)")
                     .padding(.leading, 100)
             }
             Image("thaitoneOriginal3")
