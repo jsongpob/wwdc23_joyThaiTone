@@ -14,4 +14,4 @@ Are you ready? For learning and playing with the story and history of the color 
 ![joyThaiTone_screenshot_collection](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-collection-screen.gif)
 
 ### Play
-![joyThaiTone_screenshot_play](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-collection-screen.gif)
+![joyThaiTone_screenshot_play](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-play-screen.gif)
