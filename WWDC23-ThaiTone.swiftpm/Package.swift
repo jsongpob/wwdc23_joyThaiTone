@@ -16,7 +16,6 @@ let package = Package(
         .iOSApplication(
             name: "joyThaiTone",
             targets: ["AppModule"],
-            bundleIdentifier: "th.ac.su.hamthanan.s.thaitone",
             teamIdentifier: "AWK828SHGV",
             displayVersion: "1.0",
             bundleVersion: "1",
