@@ -16,5 +16,5 @@ Are you ready? For learning and playing with the story and history of the color 
 ### Play
 ![joyThaiTone_screenshot_play](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-play-screen.gif)
 
-##Video Example
+## Video Example
 
