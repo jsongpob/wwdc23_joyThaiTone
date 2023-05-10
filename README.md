@@ -1,7 +1,7 @@
 # joyThaiTone
 Swift Student Challenge Submission WWDC 2023
 
-![joyThaiTone_banner](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-banner.png)
+![joyThaiTone_banner](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/assets/pictures/github_profile/joythaitone-banner.png)
 
 ## Introduction
 > This project was sent to participate in the WWDC23 Swift Student Challenge and didn't receive the award.
@@ -11,13 +11,13 @@ Are you ready? For learning and playing with the story and history of the color 
 ## Screenshots
 
 ### Learning
-![joyThaiTone_screenshot_learn](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-learn-screen.gif)
+![joyThaiTone_screenshot_learn](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/assets/pictures/github_profile/joythaitone-learn-screen.gif)
 
 ### Collection
-![joyThaiTone_screenshot_collection](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-collection-screen.gif)
+![joyThaiTone_screenshot_collection](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/assets/pictures/github_profile/joythaitone-collection-screen.gif)
 
 ### Play
-![joyThaiTone_screenshot_play](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-play-screen.gif)
+![joyThaiTone_screenshot_play](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/assets/pictures/github_profile/joythaitone-play-screen.gif)
 
 ## Video Example
 [![Enjoy with friends, play with (joyThaiTone)](http://img.youtube.com/vi/0_LjXGrKjXY/0.jpg)](https://youtu.be/0_LjXGrKjXY)
