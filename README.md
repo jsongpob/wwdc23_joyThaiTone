@@ -1,5 +1,5 @@
 # joyThaiTone
-Swift Student Challenge Submission /WWDC 2023
+Swift Student Challenge Submission WWDC 2023
 
 ![joyThaiTone_banner](https://github.com/jsongpob/wwdc23_joyThaiTone/blob/main/pictures/github_profile/joythaitone-banner.png)
 
